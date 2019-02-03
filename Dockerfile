@@ -12,6 +12,7 @@ RUN \
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
+    && docker-php-ext-enable $PECL_EXTENSIONS \
     && docker-php-source delete \
     && docker-php-ext-install $PHP_EXTENSIONS \
   # Composer
