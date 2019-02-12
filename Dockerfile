@@ -5,9 +5,11 @@ MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 RUN \
   # Define
   PECL_EXTENSIONS="redis"; \
-  PHP_EXTENSIONS="zip mysqli pdo_mysql opcache bcmath"; \
+  PHP_EXTENSIONS="zip mysqli pdo_mysql opcache bcmath gd gmp intl ldap exif soap bz2 calendar"; \
   # Dev deps
-  apk add -U --virtual temp autoconf g++ file re2c make zlib-dev libtool pcre-dev \
+  apk add -U --virtual temp autoconf g++ file re2c make zlib-dev libtool pcre-dev openldap-dev libxml2-dev bzip2-dev \
+  # Deps
+  && apk add libpng-dev gmp-dev icu-dev libzip-dev \
   # PHP extensions
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
