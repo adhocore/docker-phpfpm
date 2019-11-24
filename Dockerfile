@@ -9,7 +9,7 @@ RUN \
   # Dev deps
   apk add -U --virtual temp autoconf g++ file re2c make zlib-dev libtool pcre-dev openldap-dev libxml2-dev bzip2-dev \
   # Deps
-  && apk add libpng-dev gmp-dev icu-dev libzip-dev \
+  && apk add libpng-dev gmp-dev icu-dev libzip-dev openldap libbz2 \
   # PHP extensions
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
