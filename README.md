@@ -7,7 +7,7 @@ It contains PHP7.4.0 with plenty of common extensions.
 To pull latest image:
 
 ```sh
-docker pull adhocore/phpfpm
+docker pull adhocore/phpfpm:7.4
 ```
 
 To use in docker-compose
