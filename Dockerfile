@@ -1,30 +1,41 @@
-FROM php:7.2.24-fpm-alpine3.10
+FROM php:7.4.0-fpm-alpine3.10
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
+ENV XHPROF_VERSION=5.0.1
+ENV PECL_EXTENSIONS="redis yaml imagick xdebug"
+ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli opcache pdo_mysql soap zip"
+
 RUN \
-  # Define
-  PECL_EXTENSIONS="redis"; \
-  PHP_EXTENSIONS="zip mysqli pdo_mysql opcache bcmath gd gmp intl ldap exif soap bz2 calendar"; \
-  # Dev deps
-  apk add -U --virtual temp autoconf g++ file re2c make zlib-dev libtool pcre-dev openldap-dev libxml2-dev bzip2-dev \
-  # Deps
-  && apk add libpng-dev gmp-dev icu-dev libzip-dev openldap libbz2 \
-  # PHP extensions
-  && docker-php-source extract \
+  # deps
+  apk add -U --virtual temp \
+    autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
+      icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev \
+    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml
+
+RUN \
+  # php extensions
+  docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
-    && docker-php-ext-enable $PECL_EXTENSIONS \
-    && docker-php-ext-install $PHP_EXTENSIONS \
-    && docker-php-source delete \
-  # Composer
-  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-  # Cleanup
-  && apk del temp \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* \
-    && rm -rf /usr/share/doc/* /usr/share/man/* \
-    && rm -rf /usr/src/php.tar.xz /usr/local/bin/docker-php-ext*
+    && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} \
+    && docker-php-ext-install $PHP_EXTENSIONS
 
-USER www-data
+RUN \
+  # tideways_xhprof
+  curl -sSLo /tmp/xhprof.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSION.tar.gz \
+    && tar xzf /tmp/xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
+    && phpize && ./configure \
+    && make && make install \
+    && docker-php-ext-enable tideways_xhprof \
+    && cd .. && rm -rf php-xhprof-extension-$XHPROF_VERSION /tmp/xhprof.tar.gz \
+  && docker-php-source delete
 
-WORKDIR /var/www/html
+RUN \
+  # composer
+  curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN \
+  # cleanup
+  apk del temp \
+    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/*
