@@ -63,8 +63,10 @@ pcre
 PDO
 pdo_mysql
 pdo_sqlite
+phalcon
 Phar
 posix
+psr
 readline
 redis
 Reflection
@@ -87,6 +89,7 @@ zip
 zlib
 ```
 
-`phalcon` has been removed as it conflicted with `pcre` in `PHP7.4`.
+`phalcon` web framework `4.0.0-rc.3` has been installed.
 
-Read more about [tideways](https://github.com/tideways/php-xhprof-extension).
+Read more about [tideways](https://github.com/tideways/php-xhprof-extension)
+and [phalcon](https://github.com/phalcon/cphalcon).
