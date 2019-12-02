@@ -3,8 +3,9 @@ FROM php:7.4.0-fpm-alpine3.10
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV XHPROF_VERSION=5.0.1
-ENV PECL_EXTENSIONS="redis yaml imagick xdebug"
-ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli opcache pdo_mysql soap zip"
+ENV PHALCON_VERSION=4.0.0-rc.3
+ENV PECL_EXTENSIONS="imagick psr redis xdebug yaml"
+ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli pdo_mysql soap zip"
 
 RUN \
   # deps
@@ -18,7 +19,7 @@ RUN \
   docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
-    && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} \
+    && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} opcache \
     && docker-php-ext-install $PHP_EXTENSIONS
 
 RUN \
@@ -30,6 +31,13 @@ RUN \
     && docker-php-ext-enable tideways_xhprof \
     && cd .. && rm -rf php-xhprof-extension-$XHPROF_VERSION /tmp/xhprof.tar.gz \
   && docker-php-source delete
+
+RUN \
+  # phalcon
+  curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
+    && cd /tmp/ && tar xvzf phalcon.tar.gz \
+    && cd cphalcon-$PHALCON_VERSION/build && sh install \
+    && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini
 
 RUN \
   # composer
