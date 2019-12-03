@@ -4,15 +4,15 @@ MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV XHPROF_VERSION=5.0.1
 ENV PHALCON_VERSION=4.0.0-rc.3
-ENV PECL_EXTENSIONS="imagick psr redis xdebug yaml"
-ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli pdo_mysql soap zip"
+ENV PECL_EXTENSIONS="ast igbinary imagick psr redis uuid xdebug yaml"
+ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql soap zip"
 
 RUN \
   # deps
   apk add -U --virtual temp \
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
-      icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev \
-    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml
+      icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
+    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml libpq
 
 RUN \
   # php extensions
@@ -20,7 +20,8 @@ RUN \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
     && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} opcache \
-    && docker-php-ext-install $PHP_EXTENSIONS
+    && docker-php-ext-install $PHP_EXTENSIONS \
+    && pecl clear-cache
 
 RUN \
   # tideways_xhprof
@@ -35,7 +36,7 @@ RUN \
 RUN \
   # phalcon
   curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
-    && cd /tmp/ && tar xvzf phalcon.tar.gz \
+    && cd /tmp/ && tar xzf phalcon.tar.gz \
     && cd cphalcon-$PHALCON_VERSION/build && sh install \
     && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini
 

@@ -33,6 +33,7 @@ services:
 The following PHP extensions are installed:
 
 ```
+ast
 bcmath
 bz2
 calendar
@@ -50,6 +51,7 @@ gettext
 gmp
 hash
 iconv
+igbinary
 imagick
 intl
 json
@@ -59,10 +61,13 @@ mbstring
 mysqli
 mysqlnd
 openssl
+pcntl
 pcre
 PDO
 pdo_mysql
+pdo_pgsql
 pdo_sqlite
+pgsql
 phalcon
 Phar
 posix
@@ -79,6 +84,7 @@ sqlite3
 standard
 tideways_xhprof
 tokenizer
+uuid
 xdebug
 xml
 xmlreader
