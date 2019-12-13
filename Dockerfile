@@ -20,8 +20,7 @@ RUN \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
     && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} opcache \
-    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS \
-    && pecl clear-cache
+    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS
 
 # tideways_xhprof
 RUN \
@@ -29,9 +28,7 @@ RUN \
     && tar xzf /tmp/xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
     && phpize && ./configure \
     && make && make install \
-    && docker-php-ext-enable tideways_xhprof \
-    && cd .. && rm -rf php-xhprof-extension-$XHPROF_VERSION /tmp/xhprof.tar.gz \
-  && docker-php-source delete
+    && docker-php-ext-enable tideways_xhprof
 
 # phalcon
 RUN \
@@ -47,4 +44,6 @@ RUN \
 # cleanup
 RUN \
   apk del temp \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/*
+    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* \
+    && pecl clear-cache \
+    && docker-php-source delete
