@@ -33,66 +33,25 @@ services:
 The following PHP extensions are installed:
 
 ```
-ast
-bcmath
-bz2
-calendar
-Core
-ctype
-curl
-date
-dom
-exif
-fileinfo
-filter
-ftp
-gd
-gettext
-gmp
-hash
-iconv
-igbinary
-imagick
-intl
-json
-ldap
-libxml
-mbstring
-mysqli
-mysqlnd
-openssl
-pcntl
-pcre
-PDO
-pdo_mysql
-pdo_pgsql
-pdo_sqlite
-pgsql
-phalcon
-Phar
-posix
-psr
-readline
-redis
-Reflection
-session
-SimpleXML
-soap
-sodium
-SPL
-sqlite3
-standard
-tideways_xhprof
-tokenizer
-uuid
-xdebug
-xml
-xmlreader
-xmlwriter
-yaml
-Zend OPcache
-zip
-zlib
+- ast               - bcmath            - bz2               - calendar
+- cgi-fcgi          - core              - ctype             - curl
+- date              - dom               - event             - exif
+- fileinfo          - filter            - ftp               - gd
+- gettext           - gmp               - hash              - iconv
+- igbinary          - imagick           - imap              - intl
+- json              - ldap              - libxml            - lzf
+- mbstring          - memcached         - mongodb           - msgpack
+- mysqli            - mysqlnd           - openssl           - pcntl
+- pcre              - pdo               - pdo_mysql         - pdo_pgsql
+- pdo_sqlite        - pgsql             - phalcon           - phar
+- posix             - psr               - readline          - redis
+- reflection        - session           - simplexml         - soap
+- sockets           - sodium            - spl               - sqlite3
+- ssh2              - standard          - swoole            - swoole_async
+- sysvmsg           - sysvsem           - sysvshm           - tideways_xhprof
+- tidy              - tokenizer         - uuid              - xdebug
+- xml               - xmlreader         - xmlwriter         - yaml
+- zend opcache      - zip               - zlib
 ```
 
 `phalcon` web framework `4.0.0-rc.3` has been installed.
