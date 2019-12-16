@@ -4,23 +4,40 @@ MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV XHPROF_VERSION=5.0.1
 ENV PHALCON_VERSION=4.0.0-rc.3
-ENV PECL_EXTENSIONS="ast igbinary imagick psr redis uuid xdebug yaml"
-ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql soap zip"
+ENV SWOOLE_VERSION=4.4.12
+ENV PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack psr redis ssh2-1.2 uuid xdebug yaml"
+ENV PECL_BUNDLE="memcached event"
+ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
+  soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
 
 # deps
 RUN \
   apk add -U --virtual temp \
+    # dev deps
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
-    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml libpq
+      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev \
+    # prod deps
+    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent
 
 # php extensions
 RUN \
   docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
-    && docker-php-ext-enable ${PECL_EXTENSIONS//[-\.0-9]/} opcache \
-    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS \
+    && cd /usr/src/php/ext/ \
+    && for BUNDLE_EXT in $PECL_BUNDLE; do pecl bundle $BUNDLE_EXT; done \
+    && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
+    # swoole
+    && curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
+      && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_VERSION.tar.gz \
+      && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
+      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_VERSION swoole_async \
+      && rm -f swoole.tar.gz swoole_async.tar.gz \
+    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
+    && cd /usr/local/etc/php/conf.d/ \
+      && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
     && pecl clear-cache
 
 # tideways_xhprof
