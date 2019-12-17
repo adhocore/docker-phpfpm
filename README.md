@@ -57,4 +57,4 @@ The following PHP extensions are installed:
 `phalcon` web framework `4.0.0-rc.3` has been installed.
 
 Read more about [tideways](https://github.com/tideways/php-xhprof-extension)
-and [phalcon](https://github.com/phalcon/cphalcon).
+[swoole](https://www.swoole.co.uk/) and [phalcon](https://github.com/phalcon/cphalcon).
