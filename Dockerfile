@@ -2,13 +2,14 @@ FROM php:7.4.0-fpm-alpine3.10
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
-ENV XHPROF_VERSION=5.0.1
-ENV PHALCON_VERSION=4.0.0-rc.3
-ENV SWOOLE_VERSION=4.4.12
-ENV PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack psr redis ssh2-1.2 uuid xdebug yaml"
-ENV PECL_BUNDLE="memcached event"
-ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
-  soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
+ENV \
+  XHPROF_VERSION=5.0.1 \
+  PHALCON_VERSION=4.0.0-rc.3 \
+  SWOOLE_VERSION=4.4.12 \
+  PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack psr redis ssh2-1.2 uuid xdebug yaml" \
+  PECL_BUNDLE="memcached event" \
+  PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
+    soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
 
 RUN \
 # deps
