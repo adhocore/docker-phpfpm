@@ -10,20 +10,19 @@ ENV PECL_BUNDLE="memcached event"
 ENV PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
   soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
 
-# deps
 RUN \
-  apk add -U --virtual temp \
+# deps
+  apk add -U --no-cache --virtual temp \
     # dev deps
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev \
     # prod deps
-    && apk add icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
-      libpq tidyhtml imap-dev libmemcached libssh2 libevent
-
+    && apk add --no-cache icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent \
+#
 # php extensions
-RUN \
-  docker-php-source extract \
+  && docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && pecl install $PECL_EXTENSIONS \
     && cd /usr/src/php/ext/ \
@@ -38,29 +37,25 @@ RUN \
     && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
     && cd /usr/local/etc/php/conf.d/ \
       && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
-    && pecl clear-cache
-
+    && pecl clear-cache \
+  && docker-php-source delete \
+#
 # tideways_xhprof
-RUN \
-  curl -sSLo /tmp/xhprof.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSION.tar.gz \
+  && curl -sSLo /tmp/xhprof.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSION.tar.gz \
     && cd /tmp/ && tar xzf xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
     && phpize && ./configure \
     && make -j "$(nproc)" && make install \
-    && docker-php-ext-enable tideways_xhprof
-
+    && docker-php-ext-enable tideways_xhprof \
+#
 # phalcon
-RUN \
-  curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
+  && curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
     && cd /tmp/ && tar xzf phalcon.tar.gz \
     && cd cphalcon-$PHALCON_VERSION/build && sh install \
-    && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini
-
+    && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini \
+#
 # composer
-RUN \
-  curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+#
 # cleanup
-RUN \
-  apk del temp \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* \
-    && docker-php-source delete
+  && apk del temp \
+    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/*
