@@ -43,9 +43,9 @@ RUN \
 # tideways_xhprof
 RUN \
   curl -sSLo /tmp/xhprof.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSION.tar.gz \
-    && tar xzf /tmp/xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
+    && cd /tmp/ && tar xzf xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
     && phpize && ./configure \
-    && make && make install \
+    && make -j "$(nproc)" && make install \
     && docker-php-ext-enable tideways_xhprof
 
 # phalcon
