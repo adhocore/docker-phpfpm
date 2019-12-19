@@ -51,8 +51,8 @@ The following PHP extensions are installed:
 - ssh2              - standard          - swoole            - swoole_async
 - sysvmsg           - sysvsem           - sysvshm           - tideways_xhprof
 - tidy              - tokenizer         - uuid              - xdebug
-- xml               - xmlreader         - xmlwriter         - yaml
-- zend opcache      - zip               - zlib
+- xlswriter         - xml               - xmlreader         - xmlwriter
+- yaml              - zend opcache      - zip               - zlib
 ```
 
 Read more about
