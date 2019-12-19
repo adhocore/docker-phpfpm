@@ -6,7 +6,7 @@ ENV \
   XHPROF_VERSION=5.0.1 \
   PHALCON_VERSION=4.0.0-rc.3 \
   SWOOLE_VERSION=4.4.12 \
-  PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack pcov psr redis ssh2-1.2 uuid xdebug yaml" \
+  PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack pcov psr redis ssh2-1.2 uuid xdebug xlswriter yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
