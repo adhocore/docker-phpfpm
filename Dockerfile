@@ -6,7 +6,9 @@ ENV \
   XHPROF_VERSION=5.0.1 \
   PHALCON_VERSION=4.0.0-rc.3 \
   SWOOLE_VERSION=4.4.12 \
-  PECL_EXTENSIONS="ast igbinary imagick lzf mongodb msgpack pcov psr redis ssh2-1.2 uuid xdebug xlswriter yaml" \
+  MAXMIND_VERSION=1.4.2 \
+  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr redis \
+    ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
@@ -17,10 +19,10 @@ RUN \
     # dev deps
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
-      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev \
+      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev \
     # prod deps
     && apk add --no-cache icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
-      libpq tidyhtml imap-dev libmemcached libssh2 libevent \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev lua \
 #
 # php extensions
   && docker-php-source extract \
@@ -63,3 +65,5 @@ RUN \
 
 # docker-php-ext-disable
 COPY docker-php-ext-disable.sh /usr/local/bin/docker-php-ext-disable
+
+COPY ext.php /ext.php
