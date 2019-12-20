@@ -2,7 +2,7 @@
 
 Docker PHP FPM with lean alpine base. The download size is just about 90MB.
 
-It contains PHP7.4.0 with plenty of common and useful extensions.
+It contains PHP7.4.1 with plenty of common and useful extensions.
 
 ## Usage
 To pull latest image:
@@ -34,25 +34,27 @@ services:
 The following PHP extensions are installed:
 
 ```
-- ast               - bcmath            - bz2               - calendar
-- core              - ctype             - curl              - date
-- dom               - event             - exif              - fileinfo
-- filter            - ftp               - gd                - gettext
-- gmp               - hash              - iconv             - igbinary
+- apcu              - ast               - bcmath            - bz2
+- calendar          - core              - ctype             - curl
+- date              - dom               - ds                - ev
+- event             - exif              - fileinfo          - filter
+- ftp               - gd                - gettext           - gmp
+- hash              - hrtime            - iconv             - igbinary
 - imagick           - imap              - intl              - json
-- ldap              - libxml            - lzf               - mbstring
-- memcached         - mongodb           - msgpack           - mysqli
-- mysqlnd           - openssl           - pcntl             - pcov
-- pcre              - pdo               - pdo_mysql         - pdo_pgsql
-- pdo_sqlite        - pgsql             - phalcon           - phar
-- posix             - psr               - readline          - redis
-- reflection        - session           - simplexml         - soap
-- sockets           - sodium            - spl               - sqlite3
-- ssh2              - standard          - swoole            - swoole_async
-- sysvmsg           - sysvsem           - sysvshm           - tideways_xhprof
-- tidy              - tokenizer         - uuid              - xdebug
-- xlswriter         - xml               - xmlreader         - xmlwriter
-- yaml              - zend opcache      - zip               - zlib
+- ldap              - libxml            - lua               - lzf
+- mbstring          - memcached         - mongodb           - msgpack
+- mysqli            - mysqlnd           - oauth             - openssl
+- pcntl             - pcov              - pcre              - pdo
+- pdo_mysql         - pdo_pgsql         - pdo_sqlite        - pgsql
+- phalcon           - phar              - posix             - psr
+- readline          - redis             - reflection        - session
+- simplexml         - soap              - sockets           - sodium
+- spl               - sqlite3           - ssh2              - standard
+- swoole            - swoole_async      - sysvmsg           - sysvsem
+- sysvshm           - tideways_xhprof   - tidy              - tokenizer
+- uuid              - xdebug            - xlswriter         - xml
+- xmlreader         - xmlwriter         - yaf               - yaml
+- zend opcache      - zip               - zlib
 ```
 
 Read more about
