@@ -4,7 +4,7 @@ MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
   XHPROF_VERSION=5.0.1 \
-  PHALCON_VERSION=4.0.0-rc.3 \
+  PHALCON_VERSION=4.0.0 \
   SWOOLE_VERSION=4.4.12 \
   MAXMIND_VERSION=1.4.2 \
   PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr redis \
