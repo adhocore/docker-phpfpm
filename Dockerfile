@@ -42,7 +42,7 @@ RUN \
     && curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
       && tar xzf zephir_parser.tar.gz \
       && rm -f zephir_parser.tar.gz \
-      && mv php-zephir-parer-$ZEPHIR_VERSION zephir_parser \
+      && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser \
     && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
     && cd /usr/local/etc/php/conf.d/ \
       && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
