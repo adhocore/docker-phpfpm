@@ -72,4 +72,6 @@ RUN \
 # docker-php-ext-disable
 COPY docker-php-ext-disable.sh /usr/local/bin/docker-php-ext-disable
 
+# ext
 COPY ext.php /ext.php
+RUN php -f /ext.php
