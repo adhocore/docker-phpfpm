@@ -57,7 +57,7 @@ The following PHP extensions are installed:
 - sysvshm           - tideways_xhprof   - tidy              - tokenizer
 - uuid              - xdebug            - xlswriter         - xml
 - xmlreader         - xmlwriter         - yaf               - yaml
-- zend opcache      - zip               - zlib
+- zend opcache      - zephir_parser     - zip               - zlib
 ```
 
 Read more about
