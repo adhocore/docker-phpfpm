@@ -3,7 +3,8 @@ FROM php:7.4.1-fpm-alpine3.10
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
-  XHPROF_VERSION=5.0.1 \
+  XHPROF_VERSION=5.0.1\
+  ZEPHIR_VERSION=1.3.3 \
   PHALCON_VERSION=4.0.0 \
   SWOOLE_VERSION=4.4.12 \
   MAXMIND_VERSION=1.4.2 \
@@ -11,7 +12,7 @@ ENV \
     ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
-    soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip"
+    soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip zephir_parser"
 
 RUN \
 # deps
@@ -37,6 +38,11 @@ RUN \
       && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
       && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_VERSION swoole_async \
       && rm -f swoole.tar.gz swoole_async.tar.gz \
+    # zephir_parser
+    && curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
+      && tar xzf zephir_parser.tar.gz \
+      && rm -f zephir_parser.tar.gz \
+      && mv php-zephir-parer-$ZEPHIR_VERSION zephir_parser \
     && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
     && cd /usr/local/etc/php/conf.d/ \
       && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
