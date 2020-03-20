@@ -64,6 +64,7 @@ RUN \
 #
 # composer
   && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && composer global require hirak/prestissimo \
 #
 # cleanup
   && apk del temp \
