@@ -2,7 +2,7 @@
 
 Docker PHP FPM with lean alpine base. The download size is just about ~100MB.
 
-It contains PHP7.4.7 with plenty of common and useful extensions.
+It contains PHP7.4.8 with plenty of common and useful extensions.
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
