@@ -1,4 +1,5 @@
 #!/bin/sh
+
 set -e
 
 usage() {
@@ -13,12 +14,8 @@ usage() {
 
 modules=
 for module; do
-  [[ "$module" == "--help" ]] \
-    || [[ "$module" == "-h" ]] \
-    && usage >&2
-   [[ -n "$modules" ]] \
-    && modules="$modules $module" \
-    || modules="$module"
+  [[ "$module" == "--help" ]] || [[ "$module" == "-h" ]] && usage >&2
+  [[ -n "$modules" ]] && modules="$modules $module" || modules="$module"
 done
 
 [[ -n "$module" ]] || usage >&2
@@ -30,5 +27,6 @@ if ! command -v pickle &> /dev/null; then
 fi
 
 for module in $modules; do
-  pickle install -n --defaults $module
+  (php -m | grep -q $module && echo "$module already installed") \
+    || (pickle install -n --defaults $module && docker-php-ext-enable $module > /dev/null)
 done
