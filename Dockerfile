@@ -1,4 +1,4 @@
-FROM php:8.0.0beta1-fpm-alpine3.12
+FROM php:8.0.0beta3-fpm-alpine3.12
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -6,15 +6,18 @@ ENV \
   XHPROF_VERSION=5.0.1 \
   ZEPHIR_VERSION=1.3.3 \
   PHALCON_VERSION=4.0.6 \
-  SWOOLE_VERSION=4.5.2 \
+  SWOOLE_VERSION=4.5.3 \
+  SWOOLE_ASYNC_VERSION=4.4.16 \
   MAXMIND_VERSION=1.4.2 \
+  LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="ds ev event hrtime imagick lua mongodb msgpack oauth redis ssh2-1.2 xdebug xlswriter yaf yaml" \
   PECL_EXTENSIONS="apcu ast igbinary lzf memcached pcov psr uuid" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
-# docker-php-ext-disable
+# docker-php-ext-*
 COPY docker-php-ext-disable.sh /usr/local/bin/docker-php-ext-disable
+# COPY pickle.phar /usr/local/bin/pickle
 COPY docker-pickle-ext-install.sh /usr/local/bin/docker-pickle-ext-install
 
 RUN \
@@ -25,20 +28,20 @@ RUN \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev libxslt-dev \
     # prod deps
-    && apk add --no-cache aspell gettext icu imagemagick imap-dev libzip libbz2 libxml2-utils libpq \
+    && apk add --no-cache aspell gettext gnu-libiconv icu imagemagick imap-dev libzip libbz2 libxml2-utils libpq \
       libmemcached libssh2 libevent libev libxslt lua openldap openldap-back-mdb tidyhtml yaml \
 #
 # php extensions
   && docker-php-source extract \
-    && docker-php-ext-install $PHP_EXTENSIONS \
-    && docker-pickle-ext-install $PECL_EXTENSIONS \
-    && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
+    && docker-php-ext-install $PHP_EXTENSIONS > /dev/null \
+    && docker-pickle-ext-install $PECL_EXTENSIONS > /dev/null \
+    && docker-php-ext-enable opcache \
     #&& cd /usr/src/php/ext/ \
     # swoole
     #&& curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-    #  && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v4.4.16.tar.gz \
+    #  && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
     #  && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-    #  && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-4.4.16 swoole_async \
+    #  && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
     #  && rm -f swoole.tar.gz swoole_async.tar.gz \
     # zephir_parser
     #&& curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
