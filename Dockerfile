@@ -1,4 +1,4 @@
-FROM php:7.4.9-fpm-alpine3.12
+FROM php:7.4.10-fpm-alpine3.12
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -23,7 +23,7 @@ RUN \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev \
     # prod deps
-    && apk add --no-cache icu gettext gnu-libconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+    && apk add --no-cache icu gettext gnu-libiconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
       libpq tidyhtml imap-dev libmemcached libssh2 libevent libev lua \
 #
 # php extensions
