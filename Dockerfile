@@ -8,6 +8,7 @@ ENV \
   PHALCON_VERSION=4.0.0 \
   SWOOLE_VERSION=4.4.12 \
   MAXMIND_VERSION=1.4.2 \
+  LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr redis \
     ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
@@ -22,7 +23,7 @@ RUN \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev \
     # prod deps
-    && apk add --no-cache icu gettext imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+    && apk add --no-cache icu gettext gnu-libconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
       libpq tidyhtml imap-dev libmemcached libssh2 libevent libev lua \
 #
 # php extensions
