@@ -27,6 +27,7 @@ services:
     image: adhocore/phpfpm:7.4
     container_name: phpfpm
     volumes:
+      - app/root:/var/www/html
       # Here you can also volume php ini settings
       # - /path/to/zz-overrides:/usr/local/etc/php/conf.d/zz-overrides.ini
     ports:
