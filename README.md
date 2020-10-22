@@ -51,12 +51,12 @@ The following PHP extensions are installed:
 - pcov              - pcre              - pdo               - pdo_mysql
 - pdo_pgsql         - pdo_sqlite        - pgsql             - phar
 - posix             - pspell            - psr               - readline
-- reflection        - session           - shmop             - simplexml
-- soap              - sockets           - sodium            - spl
-- sqlite3           - standard          - sysvmsg           - sysvsem
-- sysvshm           - tidy              - tokenizer         - uuid
-- xml               - xmlreader         - xmlwriter         - xsl
-- zend opcache      - zip               - zlib
+- redis             - reflection        - session           - shmop
+- simplexml         - soap              - sockets           - sodium
+- spl               - sqlite3           - standard          - sysvmsg
+- sysvsem           - sysvshm.          - tidy.             - tokenizer
+- uuid              - xml               - xmlreader         - xmlwriter
+- xsl               - zend opcache      - zip               - zlib
 ```
 
 Read more about
