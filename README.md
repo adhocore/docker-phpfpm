@@ -2,10 +2,10 @@
 
 Docker PHP FPM with lean alpine base. The download size is just about ~100MB.
 
-It contains PHP8.0rc3 with plenty of common and useful extensions.
+It contains PHP8.0.0 with plenty of common and useful extensions.
 
-This version of PHP is not yet production ready.
-You can still continue using [`adhocore/phpfpm:7.4`](https://github.com/adhocore/docker-phpfpm/tree/7.4) in production.
+You can also continue using [`adhocore/phpfpm:7.4`](
+https://github.com/adhocore/docker-phpfpm/tree/7.4).
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
@@ -14,7 +14,7 @@ If you are looking for a complete local development stack then check
 To pull latest image:
 
 ```sh
-docker pull adhocore/phpfpm:8.0rc
+docker pull adhocore/phpfpm:8.0
 ```
 
 To use in docker-compose
@@ -24,7 +24,7 @@ version: '3'
 
 services:
   phpfpm:
-    image: adhocore/phpfpm:8.0rc
+    image: adhocore/phpfpm:8.0
     container_name: phpfpm
     volumes:
       # Here you can also volume php ini settings
@@ -61,8 +61,4 @@ The following PHP extensions are installed:
 
 Read more about
 [pcov](https://github.com/krakjoe/pcov),
-[psr](https://github.com/jbboehr/php-psr),
-
-### Production Usage
-
-Not yet ready for production usage.
+[psr](https://github.com/jbboehr/php-psr) 
