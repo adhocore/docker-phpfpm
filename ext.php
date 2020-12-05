@@ -2,6 +2,8 @@
 
 $ex = array_map('strtolower', get_loaded_extensions());
 
+echo 'Total: ', count($ex), "\n";
+
 sort($ex);
 foreach (array_chunk($ex, 4) as $ee) {
     foreach ($ee as $e) {
