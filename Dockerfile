@@ -3,22 +3,17 @@ FROM php:8.0.0-fpm-alpine3.12
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
-  XHPROF_VERSION=5.0.1 \
-  ZEPHIR_VERSION=1.3.3 \
-  PHALCON_VERSION=4.0.6 \
-  SWOOLE_VERSION=4.5.3 \
-  SWOOLE_ASYNC_VERSION=4.4.16 \
   MAXMIND_VERSION=1.4.2 \
+  SWOOLE_VERSION=4.5.9 \
+  SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS_FUTURE="ds ev event hrtime imagick lua mongodb msgpack oauth ssh2-1.2 xdebug xlswriter yaf yaml" \
-  PECL_EXTENSIONS="apcu ast igbinary lzf memcached pcov psr redis uuid" \
+  PECL_EXTENSIONS_FUTURE="ev event hrtime imagick lua rdkafka ssh2-1.2 xlswriter yaf" \
+  PECL_EXTENSIONS="apcu ast ds igbinary lzf memcached mongodb msgpack oauth pcov psr redis uuid xdebug yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
 # docker-php-ext-*
 COPY docker-php-ext-disable.sh /usr/local/bin/docker-php-ext-disable
-# COPY pickle.phar /usr/local/bin/pickle
-COPY docker-pickle-ext-install.sh /usr/local/bin/docker-pickle-ext-install
 
 RUN \
 # deps
@@ -34,41 +29,21 @@ RUN \
 # php extensions
   && docker-php-source extract \
     && docker-php-ext-install $PHP_EXTENSIONS > /dev/null \
-    && docker-pickle-ext-install $PECL_EXTENSIONS > /dev/null \
-    && docker-php-ext-enable opcache \
-    #&& cd /usr/src/php/ext/ \
+    && pecl $PECL_EXTENSIONS > /dev/null \
+    && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
+    && cd /usr/src/php/ext/ \
     # swoole
-    #&& curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-    #  && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
-    #  && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-    #  && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
-    #  && rm -f swoole.tar.gz swoole_async.tar.gz \
-    # zephir_parser
-    #&& curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
-    #  && tar xzf zephir_parser.tar.gz \
-    #  && rm -f zephir_parser.tar.gz \
-    #  && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser \
-    #&& docker-php-ext-install -j "$(nproc)" swoole swoole_async zephir_parser \
-    #&& cd /usr/local/etc/php/conf.d/ \
-    #  && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
+    && curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
+      && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
+      && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
+      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
+      && rm -f swoole.tar.gz swoole_async.tar.gz \
+    && docker-php-ext-install -j "$(nproc)" swoole \
   && docker-php-source delete \
 #
-# tideways_xhprof
-  #&& curl -sSLo /tmp/xhprof.tar.gz https://github.com/tideways/php-xhprof-extension/archive/v$XHPROF_VERSION.tar.gz \
-  #  && cd /tmp/ && tar xzf xhprof.tar.gz && cd php-xhprof-extension-$XHPROF_VERSION \
-  #  && phpize && ./configure \
-  #  && make -j "$(nproc)" && make install \
-  #  && docker-php-ext-enable tideways_xhprof \
-#
-# phalcon
-  #&& curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
-  #  && cd /tmp/ && tar xzf phalcon.tar.gz \
-  #  && cd cphalcon-$PHALCON_VERSION/build && sh install \
-  #  && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini \
-#
 # composer
-  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-# && composer global require hirak/prestissimo \
+  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2 \
+  && curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=/usr/local/bin --filename=composer \
 #
 # cleanup
   && apk del temp \
