@@ -25,8 +25,8 @@ for module; do
     || [[ "$module" == "-h" ]] \
     && usage >&2
   [[ -n "$modules" ]] \
-    && modules="$modules|(=|\/)$module.so" \
-    || modules="(=|\/)$module.so"
+    && modules="$modules|(=|\/)$module" \
+    || modules="(=|\/)$module"
 done
 
 [[ -n "$modules" ]] \
