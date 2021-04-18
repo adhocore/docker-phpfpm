@@ -10,6 +10,9 @@ https://github.com/adhocore/docker-phpfpm/tree/7.4).
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
 
+It comes prepackaged with `composer` - both v1 and v2.
+Use `composer2` command for v2 and `composer` for v1.
+
 ## Usage
 To pull latest image:
 
