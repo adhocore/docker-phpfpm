@@ -24,7 +24,7 @@ RUN \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev \
     # prod deps
     && apk add --no-cache icu gettext gnu-libiconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
-      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka lua \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka lua zlib \
 #
 # php extensions
   && docker-php-source extract \
