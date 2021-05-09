@@ -8,7 +8,7 @@ ENV \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="ev event hrtime imagick lua rdkafka ssh2-1.2 xlswriter yaf" \
-  PECL_EXTENSIONS="apcu ast ds igbinary lzf memcached mongodb msgpack oauth pcov psr redis uuid xdebug xhprof yaml" \
+  PECL_EXTENSIONS="apcu ast ds igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka uuid xdebug xhprof yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
@@ -21,10 +21,10 @@ RUN \
     # dev deps
     autoconf g++ file re2c make zlib-dev libtool aspell-dev pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
-      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev libxslt-dev \
+      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev libxslt-dev \
     # prod deps
     && apk add --no-cache aspell gettext gnu-libiconv icu imagemagick imap-dev libzip libbz2 libxml2-utils libpq \
-      libmemcached libssh2 libevent libev libxslt lua openldap openldap-back-mdb tidyhtml yaml \
+      libmemcached libssh2 libevent libev librdkafka libxslt lua openldap openldap-back-mdb tidyhtml yaml \
 #
 # php extensions
   && docker-php-source extract \
