@@ -9,8 +9,7 @@ Docker PHP FPM with lean alpine base. The download size is just about ~100MB.
 
 It contains PHP8.0.6 with plenty of common and useful extensions.
 
-You can also continue using [`adhocore/phpfpm:7.4`](
-https://github.com/adhocore/docker-phpfpm/tree/7.4).
+You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile).
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
@@ -49,34 +48,67 @@ services:
 
 ### Extensions
 
-The following PHP extensions are installed:
+#### PHP8.0
+
+The following PHP extensions are installed in `adhocore/phpfpm:8.0`:
 
 ```
-Total: 76
+Total: 78
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - exif
 - fileinfo          - filter            - ftp               - gd
-- gettext           - gmp               - hash              - iconv
-- igbinary          - imap              - intl              - json
-- ldap              - libxml            - lzf               - mbstring
-- memcached         - mongodb           - msgpack           - mysqli
-- mysqlnd           - oauth             - openssl           - pcntl
-- pcov              - pcre              - pdo               - pdo_mysql
-- pdo_pgsql         - pdo_sqlite        - pgsql             - phar
-- posix             - pspell            - psr               - readline
-- redis             - reflection        - session           - shmop
-- simplexml         - soap              - sockets           - sodium
-- spl               - sqlite3           - standard          - swoole
-- sysvmsg           - sysvsem           - sysvshm           - tidy
-- tokenizer         - uuid              - xdebug            - xhprof
-- xml               - xmlreader         - xmlwriter         - xsl
-- yaml              - zend opcache      - zip               - zlib
+- gettext           - gmp               - grpc              - hash
+- iconv             - igbinary          - imap              - intl
+- json              - ldap              - libxml            - lzf
+- mbstring          - memcached         - mongodb           - msgpack
+- mysqli            - mysqlnd           - oauth             - openssl
+- pcntl             - pcov              - pcre              - pdo
+- pdo_mysql         - pdo_pgsql         - pdo_sqlite        - pgsql
+- phar              - posix             - pspell            - psr
+- rdkafka           - readline          - redis             - reflection
+- session           - shmop             - simplexml         - soap
+- sockets           - sodium            - spl               - sqlite3
+- standard          - swoole            - sysvmsg           - sysvsem
+- sysvshm           - tidy              - tokenizer         - uuid
+- xdebug            - xhprof            - xml               - xmlreader
+- xmlwriter         - xsl               - yaml              - zend opcache
+- zip               - zlib
+```
+
+#### PHP7.4
+
+The following PHP extensions are installed in `adhocore/phpfpm:7.4`:
+
+```
+Total: 86
+- apcu              - ast               - bcmath            - bz2
+- calendar          - core              - ctype             - curl
+- date              - dom               - ds                - ev
+- event             - exif              - fileinfo          - filter
+- ftp               - gd                - gettext           - gmp
+- grpc              - hash              - hrtime            - iconv
+- igbinary          - imagick           - imap              - intl
+- json              - ldap              - libxml            - lua
+- lzf               - mbstring          - memcached         - mongodb
+- msgpack           - mysqli            - mysqlnd           - oauth
+- openssl           - pcntl             - pcov              - pcre
+- pdo               - pdo_mysql         - pdo_pgsql         - pdo_sqlite
+- pgsql             - phalcon           - phar              - posix
+- psr               - rdkafka           - readline          - redis
+- reflection        - session           - simplexml         - soap
+- sockets           - sodium            - spl               - sqlite3
+- ssh2              - standard          - swoole            - swoole_async
+- sysvmsg           - sysvsem           - sysvshm           - tideways_xhprof
+- tidy              - tokenizer         - uuid              - xdebug
+- xlswriter         - xml               - xmlreader         - xmlwriter
+- yaf               - yaml              - zend opcache      - zephir parser
+- zip               - zlib
 ```
 
 Read more about
 [pcov](https://github.com/krakjoe/pcov),
-[psr](https://github.com/jbboehr/php-psr) 
+[psr](https://github.com/jbboehr/php-psr)
 
 ### Production Usage
 
