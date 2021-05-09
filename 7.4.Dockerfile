@@ -23,8 +23,8 @@ RUN \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev \
     # prod deps
-    && apk add --no-cache icu gettext gnu-libiconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
-      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka lua zlib \
+    && apk add --no-cache icu gettext gnu-libiconv grpc imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka linux-headers lua zlib \
 #
 # php extensions
   && docker-php-source extract \
