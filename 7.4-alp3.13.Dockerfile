@@ -9,7 +9,7 @@ ENV \
   SWOOLE_VERSION=4.4.12 \
   MAXMIND_VERSION=1.4.2 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr redis \
+  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr rdkafka redis \
     ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
@@ -21,10 +21,10 @@ RUN \
     # dev deps
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
-      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev lua-dev \
+      libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev \
     # prod deps
     && apk add --no-cache icu gettext gnu-libiconv imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
-      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev lua \
+      libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka lua \
 #
 # php extensions
   && docker-php-source extract \
