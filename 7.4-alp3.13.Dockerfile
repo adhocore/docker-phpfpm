@@ -64,7 +64,8 @@ RUN \
     && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini \
 #
 # composer
-  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2 \
+  && curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=/usr/local/bin --filename=composer \
 #  && composer global require hirak/prestissimo \
 #
 # cleanup
