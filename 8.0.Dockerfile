@@ -4,7 +4,7 @@ MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
   MAXMIND_VERSION=1.4.2 \
-  SWOOLE_VERSION=4.5.9 \
+  SWOOLE_VERSION=4.6.6 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="ev event hrtime imagick lua ssh2-1.2 xlswriter yaf" \
