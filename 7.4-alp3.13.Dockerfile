@@ -22,6 +22,7 @@ RUN \
     autoconf g++ file re2c make zlib-dev libtool pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev \
+      freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
     && apk add --no-cache icu gettext gnu-libiconv grpc imagemagick libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
       libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka linux-headers lua zlib \
@@ -44,6 +45,7 @@ RUN \
       && tar xzf zephir_parser.tar.gz \
       && rm -f zephir_parser.tar.gz \
       && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd \
     && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
     && cd /usr/local/etc/php/conf.d/ \
       && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
