@@ -6,7 +6,7 @@ ENV \
   XHPROF_VERSION=5.0.1\
   ZEPHIR_VERSION=1.3.3 \
   PHALCON_VERSION=4.0.0 \
-  SWOOLE_VERSION=4.6.6 \
+  SWOOLE_VERSION=4.6.7 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS="apcu ast ds ev grpc hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr rdkafka redis \
@@ -30,7 +30,7 @@ RUN \
 # php extensions
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
-    && pecl install $PECL_EXTENSIONS \
+    && pecl install $PECL_EXTENSIONS > /dev/null \
     && cd /usr/src/php/ext/ \
     && for BUNDLE_EXT in $PECL_BUNDLE; do pecl bundle $BUNDLE_EXT; done \
     && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
@@ -38,7 +38,7 @@ RUN \
     && curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
       && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
       && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
+      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION \
       && rm -f swoole.tar.gz swoole_async.tar.gz \
     # zephir_parser
     && curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
@@ -46,7 +46,7 @@ RUN \
       && rm -f zephir_parser.tar.gz \
       && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd \
-    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE \
+    && docker-php-ext-install -j "$(nproc)" $PHP_EXTENSIONS $PECL_BUNDLE  > /dev/null \
     && cd /usr/local/etc/php/conf.d/ \
       && mv docker-php-ext-event.ini docker-php-ext-zevent.ini \
     && pecl clear-cache \
