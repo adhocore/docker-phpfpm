@@ -13,7 +13,7 @@ ENV \
     ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
-    soap sockets swoole swoole_async sysvshm sysvmsg sysvsem tidy zip zephir_parser"
+    soap sockets swoole sysvshm sysvmsg sysvsem tidy zip zephir_parser"
 
 RUN \
 # deps
@@ -38,7 +38,7 @@ RUN \
     && curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
       && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
       && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION \
+      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
       && rm -f swoole.tar.gz swoole_async.tar.gz \
     # zephir_parser
     && curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
