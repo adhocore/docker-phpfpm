@@ -22,12 +22,14 @@ RUN \
     autoconf g++ file re2c make zlib-dev libtool aspell-dev pcre-dev libxml2-dev bzip2-dev libzip-dev \
       icu-dev gettext-dev imagemagick-dev openldap-dev libpng-dev gmp-dev yaml-dev postgresql-dev \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev libxslt-dev \
+      freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
     && apk add --no-cache aspell gettext gnu-libiconv grpc icu imagemagick imap-dev libzip libbz2 librdkafka libxml2-utils libpq \
       libmemcached libssh2 libevent libev libxslt linux-headers lua openldap openldap-back-mdb tidyhtml yaml zlib \
 #
 # php extensions
   && docker-php-source extract \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd \
     && docker-php-ext-install $PHP_EXTENSIONS > /dev/null \
     && pecl install $PECL_EXTENSIONS > /dev/null \
     && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
