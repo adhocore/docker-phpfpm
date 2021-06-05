@@ -5,11 +5,11 @@
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Production+ready+PHP7+and+PHP8+docker+images+with+plenty+extensions&url=https://github.com/adhocore/docker-phpfpm&hashtags=docker,dockerimage,php7,php8,phpext)
 
 
-Docker PHP FPM with lean alpine base. The download size is just about ~100MB.
+Docker PHP FPM with lean alpine base. The download size is just about ~150MB.
 
-It contains PHP8.0.6 with plenty of common and useful extensions.
+It contains PHP8.0.7 with plenty of common and useful extensions.
 
-You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile).
+You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.20.
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
@@ -25,6 +25,13 @@ docker pull adhocore/phpfpm:8.0
 
 # or for alpine 3.13
 docker pull adhocore/phpfpm:8.0-alp3.13
+
+# or for php 7.4
+docker pull adhocore/phpfpm:7.4
+
+# or for php 7.4 on alpine 3.13
+docker pull adhocore/phpfpm:7.4-alp3.13
+
 ```
 
 To use in docker-compose
