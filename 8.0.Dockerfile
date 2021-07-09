@@ -1,4 +1,4 @@
-FROM php:8.0.8-fpm-alpine3.12
+FROM php:8.0.8-fpm-alpine3.13
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -24,8 +24,8 @@ RUN \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev libxslt-dev \
       freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
-    && apk add --no-cache aspell gettext gnu-libiconv grpc icu imagemagick imap-dev libzip libbz2 librdkafka libxml2-utils libpq \
-      libmemcached libssh2 libevent libev libxslt linux-headers lua openldap openldap-back-mdb tidyhtml yaml zlib \
+    && apk add --no-cache aspell gettext gnu-libiconv grpc icu imagemagick imap-dev libzip libbz2 libxml2-utils libpq \
+      libmemcached libssh2 libevent libev librdkafka libxslt linux-headers lua openldap openldap-back-mdb tidyhtml yaml zlib \
 #
 # php extensions
   && docker-php-source extract \
