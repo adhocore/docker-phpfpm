@@ -1,4 +1,4 @@
-FROM php:7.4.21-fpm-alpine3.12
+FROM php:7.4.21-fpm-alpine3.13
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -8,7 +8,6 @@ ENV \
   PHALCON_VERSION=4.0.0 \
   SWOOLE_VERSION=4.6.7 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
-  MAXMIND_VERSION=1.4.2 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS="apcu ast ds ev grpc hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr rdkafka redis \
     ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
