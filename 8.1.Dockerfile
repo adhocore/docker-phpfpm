@@ -1,4 +1,4 @@
-FROM php:8.1.0beta1-fpm-alpine3.14
+FROM php:8.1.0RC4-fpm-alpine3.14
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -45,8 +45,8 @@ RUN \
   && docker-php-source delete \
 #
 # composer
-  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2 \
-  && curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=/usr/local/bin --filename=composer \
+  && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=/usr/local/bin --filename=composer1 \
 #
 # cleanup
   && apk del temp \
