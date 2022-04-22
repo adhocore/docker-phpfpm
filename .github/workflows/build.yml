@@ -39,4 +39,4 @@ jobs:
         with:
           push: true
           file: 8.1.Dockerfile
-          tags: adhocore/phpfpm:8.1-rc
+          tags: adhocore/phpfpm:8.1
