@@ -1,14 +1,14 @@
-FROM php:8.1.4-alpine3.14
+FROM php:8.1.5-alpine3.14
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
   MAXMIND_VERSION=1.4.2 \
-  SWOOLE_VERSION=4.6.7 \
+  SWOOLE_VERSION=4.8.9 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS_FUTURE="ev event hrtime imagick lua ssh2-1.2 xlswriter yaf" \
-  PECL_EXTENSIONS="apcu ast ds grpc igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka uuid xdebug xhprof yaml" \
+  PECL_EXTENSIONS_FUTURE="event hrtime imagick lua ssh2-1.2 xlswriter" \
+  PECL_EXTENSIONS="apcu ast ds ev grpc igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka uuid xdebug xhprof yaf yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
