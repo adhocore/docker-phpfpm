@@ -9,9 +9,9 @@
 
 Docker PHP FPM with lean alpine base. The download size is just about ~150MB.
 
-It contains PHP8.0.17 with plenty of common and useful extensions.
+It contains PHP8.1.7 and PHP8.0.20 with plenty of common and useful extensions.
 
-You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.28.
+You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.30.
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
@@ -57,6 +57,35 @@ services:
 
 ### Extensions
 
+#### PHP8.1
+
+The following PHP extensions are installed in `adhocore/phpfpm:8.1`:
+
+```
+Total: 80
+- apcu              - ast               - bcmath            - bz2
+- calendar          - core              - ctype             - curl
+- date              - dom               - ds                - ev
+- exif              - fileinfo          - filter            - ftp
+- gd                - gettext           - gmp               - grpc
+- hash              - iconv             - igbinary          - imap
+- intl              - json              - ldap              - libxml
+- lzf               - mbstring          - memcached         - mongodb
+- msgpack           - mysqli            - mysqlnd           - oauth
+- openssl           - pcntl             - pcov              - pcre
+- pdo               - pdo_mysql         - pdo_pgsql         - pdo_sqlite
+- pgsql             - phar              - posix             - pspell
+- psr               - rdkafka           - readline          - redis
+- reflection        - session           - shmop             - simplexml
+- soap              - sockets           - sodium            - spl
+- sqlite3           - standard          - swoole            - sysvmsg
+- sysvsem           - sysvshm           - tidy              - tokenizer
+- uuid              - xdebug            - xhprof            - xml
+- xmlreader         - xmlwriter         - xsl               - yaf
+- yaml              - zend opcache      - zip               - zlib
+```
+
+
 #### PHP8.0
 
 The following PHP extensions are installed in `adhocore/phpfpm:8.0`:
@@ -90,7 +119,7 @@ Total: 78
 The following PHP extensions are installed in `adhocore/phpfpm:7.4`:
 
 ```
-Total: 86
+Total: 85
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
@@ -107,12 +136,12 @@ Total: 86
 - psr               - rdkafka           - readline          - redis
 - reflection        - session           - simplexml         - soap
 - sockets           - sodium            - spl               - sqlite3
-- ssh2              - standard          - swoole            - swoole_async
-- sysvmsg           - sysvsem           - sysvshm           - tideways_xhprof
-- tidy              - tokenizer         - uuid              - xdebug
-- xlswriter         - xml               - xmlreader         - xmlwriter
-- yaf               - yaml              - zend opcache      - zephir parser
-- zip               - zlib
+- ssh2              - standard          - swoole            - sysvmsg
+- sysvsem           - sysvshm           - tideways_xhprof   - tidy
+- tokenizer         - uuid              - xdebug            - xlswriter
+- xml               - xmlreader         - xmlwriter         - yaf
+- yaml              - zend opcache      - zephir parser     - zip
+- zlib
 ```
 
 Read more about
