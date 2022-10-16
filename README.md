@@ -55,6 +55,10 @@ services:
       # ...
 ```
 
+### Composer
+
+Latest versions of both Composer v1 and v2 are installed already. You can run v2 with `composer` and v1 with `composer1`.
+
 ### Extensions
 
 #### PHP8.1
