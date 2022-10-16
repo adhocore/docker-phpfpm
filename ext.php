@@ -1,6 +1,7 @@
 <?php
 
 $ex = array_map('strtolower', get_loaded_extensions());
+$ex[] = 'fpm';
 
 echo 'Total: ', count($ex), "\n";
 
