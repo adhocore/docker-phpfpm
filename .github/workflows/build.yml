@@ -19,20 +19,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: "Pull"
         run: docker pull adhocore/phpfpm:7.4 && docker pull adhocore/phpfpm:8.0 && docker pull adhocore/phpfpm:8.1 || true
-      - name: "[7.4] Build and push"
-        id: docker_build_74
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          file: 7.4.Dockerfile
-          tags: adhocore/phpfpm:7.4-alp3.13,adhocore/phpfpm:7.4
-      - name: "[8.0] Build and push"
-        id: docker_build_80
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          file: 8.0.Dockerfile
-          tags: adhocore/phpfpm:8.0-alp3.13,adhocore/phpfpm:8.0
+
       - name: "[8.1] Build and push"
         id: docker_build_81
         uses: docker/build-push-action@v2
@@ -40,3 +27,19 @@ jobs:
           push: true
           file: 8.1.Dockerfile
           tags: adhocore/phpfpm:8.1
+
+      - name: "[8.0] Build and push"
+        id: docker_build_80
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: 8.0.Dockerfile
+          tags: adhocore/phpfpm:8.0-alp3.13,adhocore/phpfpm:8.0
+
+      - name: "[7.4] Build and push"
+        id: docker_build_74
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: 7.4.Dockerfile
+          tags: adhocore/phpfpm:7.4-alp3.13,adhocore/phpfpm:7.4
