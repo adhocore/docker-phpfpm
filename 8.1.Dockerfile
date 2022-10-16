@@ -7,7 +7,7 @@ ENV \
   SWOOLE_VERSION=4.8.9 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS_FUTURE="event hrtime imagick lua ssh2-1.2 xlswriter" \
+  PECL_EXTENSIONS_FUTURE="imagick ssh2-1.3.1 xlswriter" \
   PECL_EXTENSIONS="apcu ast ds ev grpc igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka simdjson uuid xdebug xhprof yaf yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
@@ -32,8 +32,8 @@ RUN \
     && pecl channel-update pecl.php.net \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd \
     && docker-php-ext-install $PHP_EXTENSIONS > /dev/null \
-    && pecl install $PECL_EXTENSIONS > /dev/null \
-    && docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache \
+    && yes '' | pecl install $PECL_EXTENSIONS $PECL_EXTENSIONS_FUTURE > /dev/null \
+    && docker-php-ext-enable $(echo $PECL_EXTENSIONS $PECL_EXTENSIONS_FUTURE | sed -E 's/\-[^ ]+//g') opcache \
     && cd /usr/src/php/ext/ \
     # swoole
     && curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
