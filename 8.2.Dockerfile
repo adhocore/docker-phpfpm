@@ -51,8 +51,8 @@ RUN \
     # #  && tar xzf swoole_async.tar.gz && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
     #   && rm -f swoole.tar.gz swoole_async.tar.gz \
     # && docker-php-ext-install -j "$(nproc)" swoole); } \
-    && { pecl clear-cache || true; } \
-  && docker-php-ext-disable xdebug \
+    # && { pecl clear-cache || true; } \
+  && { docker-php-ext-disable xdebug || true; } \
     && docker-php-source delete \
 #
 # composer
