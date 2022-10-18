@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+extDir=$(php -r 'echo ini_get("extension_dir");')
+
+modules=
+for module; do
+  [[ "" != "$module" ]] && {
+    php -m | grep $module || modules="$modules $module"
+  }
+done
+[[ "" = "$modules" ]] && exit 0
+
+xmodules=
+for module in $modules; do
+  [[ "" != "$module" ]] && {
+    docker-php-ext-enable $module > /dev/null || true
+    (php -m | grep $module || ls $extDir/$module.so && echo "$module already installed") \
+      || ([[ "" != "$modules" ]] && modules="$modules $module" || modules="$module")
+  }
+done
+[[ "" = "$xmodules" ]] && exit 0
+
+echo "docker-php-ext-install $xmodules"
+docker-php-ext-install $xmodules > /dev/null
