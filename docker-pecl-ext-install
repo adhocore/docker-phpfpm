@@ -22,7 +22,7 @@ done
 
 xmodules=
 for module in $modules; do
-  docker-php-ext-enable $module > /dev/null || true
+  docker-php-ext-enable $(echo $module | sed -E 's/\-[^ ]+//g') > /dev/null || true
   (php -m | grep -q $module || ls $extDir/$module.so && echo "$module already installed") \
     || ([[ "" != "$xmodules" ]] && xmodules="$xmodules $module" || xmodules="$module")
 done
