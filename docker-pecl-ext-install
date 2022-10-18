@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+extDir=$(php -r 'echo ini_get("extension_dir");')
+
+usage() {
+  echo "usage: $0 [options] module-name [module-name ...]"
+  echo "   ie: $0 apcu"
+  echo "       $0 apcu redis"
+  echo
+
+  exit 1
+}
+
+modules=
+for module; do
+  [[ "$module" == "--help" ]] || [[ "$module" == "-h" ]] && usage >&2
+  [[ -n "$modules" ]] && modules="$modules $module" || modules="$module"
+done
+[[ "" = "$modules" ]] && exit 0
+
+xmodules=
+for module in $modules; do
+  docker-php-ext-enable $module > /dev/null || true
+  (php -m | grep -q $module || ls $extDir/$module.so && echo "$module already installed") \
+    || ([[ "" != "$xmodules" ]] && xmodules="$xmodules $module" || xmodules="$module")
+done
+[[ "" = "$xmodules" ]] && exit 0
+
+echo "pecl install $xmodules"
+pecl install $xmodules > /dev/null

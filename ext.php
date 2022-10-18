@@ -1,7 +1,7 @@
 <?php
 
 $ex = array_map('strtolower', get_loaded_extensions());
-$ex[] = 'fpm';
+$ex = array_merge($ex, ['fpm', 'xdebug']);
 
 echo 'Total: ', count($ex), "\n";
 
