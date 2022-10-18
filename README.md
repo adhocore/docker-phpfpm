@@ -61,6 +61,11 @@ Latest versions of both Composer v1 and v2 are installed already. You can run v2
 
 ### Extensions
 
+`xdebug` is installed but disabled by default for performance reason,
+just run `docker-php-ext-enable xdebug` to enable it again without having to rebuild/recompile.
+
+Below you can find list of extensions by image tags.
+
 #### PHP8.1
 
 The following PHP extensions are installed in `adhocore/phpfpm:8.1`:
@@ -165,3 +170,5 @@ RUN docker-php-ext-disable xdebug pcov ldap
 ```
 
 > `docker-php-ext-disable` is shell script available in `adhocore/phpfpm:8.0` only and not in official PHP docker images.
+
+> Extensions disabled can be re enabled with `docker-php-ext-enable` later again without the overhead of recompiling/rebuilding all over again.
