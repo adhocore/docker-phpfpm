@@ -3,7 +3,7 @@
 $ex = array_map('strtolower', get_loaded_extensions());
 $ex = array_merge($ex, ['fpm', 'xdebug']);
 
-echo 'Total: ', count($ex), "\n";
+echo sprintf('PHP %s, Total extensions: %d', PHP_VERSION, count($ex)), "\n";
 
 sort($ex);
 foreach (array_chunk($ex, 4) as $ee) {

@@ -20,20 +20,17 @@ It comes prepackaged with `composer` - both v1 and v2.
 Use `composer2` command for v2 and `composer` for v1.
 
 ## Usage
+
 To pull latest image:
 
 ```sh
-docker pull adhocore/phpfpm:8.0
+docker pull adhocore/phpfpm:8.1
 
-# or for alpine 3.13
-docker pull adhocore/phpfpm:8.0-alp3.13
+# or for php 8.0
+docker pull adhocore/phpfpm:8.0
 
 # or for php 7.4
 docker pull adhocore/phpfpm:7.4
-
-# or for php 7.4 on alpine 3.13
-docker pull adhocore/phpfpm:7.4-alp3.13
-
 ```
 
 To use in docker-compose
@@ -71,56 +68,59 @@ Below you can find list of extensions by image tags.
 The following PHP extensions are installed in `adhocore/phpfpm:8.1`:
 
 ```
-Total: 80
+Total: 85
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
-- exif              - fileinfo          - filter            - ftp
-- gd                - gettext           - gmp               - grpc
-- hash              - iconv             - igbinary          - imap
-- intl              - json              - ldap              - libxml
-- lzf               - mbstring          - memcached         - mongodb
-- msgpack           - mysqli            - mysqlnd           - oauth
-- openssl           - pcntl             - pcov              - pcre
-- pdo               - pdo_mysql         - pdo_pgsql         - pdo_sqlite
-- pgsql             - phar              - posix             - pspell
-- psr               - rdkafka           - readline          - redis
-- reflection        - session           - shmop             - simplexml
-- soap              - sockets           - sodium            - spl
-- sqlite3           - standard          - swoole            - sysvmsg
+- exif              - fileinfo          - filter            - fpm
+- ftp               - gd                - gettext           - gmp
+- grpc              - hash              - iconv             - igbinary
+- imagick           - imap              - intl              - json
+- ldap              - libxml            - lzf               - mbstring
+- memcached         - mongodb           - msgpack           - mysqli
+- mysqlnd           - oauth             - openssl           - pcntl
+- pcov              - pcre              - pdo               - pdo_mysql
+- pdo_pgsql         - pdo_sqlite        - pgsql             - phar
+- posix             - pspell            - psr               - rdkafka
+- readline          - redis             - reflection        - session
+- shmop             - simdjson          - simplexml         - soap
+- sockets           - sodium            - spl               - sqlite3
+- ssh2              - standard          - swoole            - sysvmsg
 - sysvsem           - sysvshm           - tidy              - tokenizer
-- uuid              - xdebug            - xhprof            - xml
-- xmlreader         - xmlwriter         - xsl               - yaf
-- yaml              - zend opcache      - zip               - zlib
+- uuid              - xdebug            - xhprof            - xlswriter
+- xml               - xmlreader         - xmlwriter         - xsl
+- yaf               - yaml              - zend opcache      - zip
+- zlib
 ```
-
 
 #### PHP8.0
 
 The following PHP extensions are installed in `adhocore/phpfpm:8.0`:
 
 ```
-Total: 78
+Total: 85
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
-- date              - dom               - ds                - exif
-- fileinfo          - filter            - ftp               - gd
-- gettext           - gmp               - grpc              - hash
-- iconv             - igbinary          - imap              - intl
-- json              - ldap              - libxml            - lzf
-- mbstring          - memcached         - mongodb           - msgpack
-- mysqli            - mysqlnd           - oauth             - openssl
-- pcntl             - pcov              - pcre              - pdo
-- pdo_mysql         - pdo_pgsql         - pdo_sqlite        - pgsql
-- phar              - posix             - pspell            - psr
-- rdkafka           - readline          - redis             - reflection
-- session           - shmop             - simplexml         - soap
+- date              - dom               - ds                - ev
+- exif              - fileinfo          - filter            - fpm
+- ftp               - gd                - gettext           - gmp
+- grpc              - hash              - iconv             - igbinary
+- imagick           - imap              - intl              - json
+- ldap              - libxml            - lzf               - mbstring
+- memcached         - mongodb           - msgpack           - mysqli
+- mysqlnd           - oauth             - openssl           - pcntl
+- pcov              - pcre              - pdo               - pdo_mysql
+- pdo_pgsql         - pdo_sqlite        - pgsql             - phar
+- posix             - pspell            - psr               - rdkafka
+- readline          - redis             - reflection        - session
+- shmop             - simdjson          - simplexml         - soap
 - sockets           - sodium            - spl               - sqlite3
-- standard          - swoole            - sysvmsg           - sysvsem
-- sysvshm           - tidy              - tokenizer         - uuid
-- xdebug            - xhprof            - xml               - xmlreader
-- xmlwriter         - xsl               - yaml              - zend opcache
-- zip               - zlib
+- ssh2              - standard          - swoole            - sysvmsg
+- sysvsem           - sysvshm           - tidy              - tokenizer
+- uuid              - xdebug            - xhprof            - xlswriter
+- xml               - xmlreader         - xmlwriter         - xsl
+- yaf               - yaml              - zend opcache      - zip
+- zlib
 ```
 
 #### PHP7.4
@@ -128,29 +128,29 @@ Total: 78
 The following PHP extensions are installed in `adhocore/phpfpm:7.4`:
 
 ```
-Total: 85
+Total: 87
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
 - event             - exif              - fileinfo          - filter
-- ftp               - gd                - gettext           - gmp
-- grpc              - hash              - hrtime            - iconv
-- igbinary          - imagick           - imap              - intl
-- json              - ldap              - libxml            - lua
-- lzf               - mbstring          - memcached         - mongodb
-- msgpack           - mysqli            - mysqlnd           - oauth
-- openssl           - pcntl             - pcov              - pcre
-- pdo               - pdo_mysql         - pdo_pgsql         - pdo_sqlite
-- pgsql             - phalcon           - phar              - posix
-- psr               - rdkafka           - readline          - redis
-- reflection        - session           - simplexml         - soap
-- sockets           - sodium            - spl               - sqlite3
-- ssh2              - standard          - swoole            - sysvmsg
-- sysvsem           - sysvshm           - tideways_xhprof   - tidy
-- tokenizer         - uuid              - xdebug            - xlswriter
-- xml               - xmlreader         - xmlwriter         - yaf
-- yaml              - zend opcache      - zephir parser     - zip
-- zlib
+- fpm               - ftp               - gd                - gettext
+- gmp               - grpc              - hash              - hrtime
+- iconv             - igbinary          - imagick           - imap
+- intl              - json              - ldap              - libxml
+- lua               - lzf               - mbstring          - memcached
+- mongodb           - msgpack           - mysqli            - mysqlnd
+- oauth             - openssl           - pcntl             - pcov
+- pcre              - pdo               - pdo_mysql         - pdo_pgsql
+- pdo_sqlite        - pgsql             - phalcon           - phar
+- posix             - psr               - rdkafka           - readline
+- redis             - reflection        - session           - simdjson
+- simplexml         - soap              - sockets           - sodium
+- spl               - sqlite3           - ssh2              - standard
+- swoole            - sysvmsg           - sysvsem           - sysvshm
+- tideways_xhprof   - tidy              - tokenizer         - uuid
+- xdebug            - xlswriter         - xml               - xmlreader
+- xmlwriter         - yaf               - yaml              - zend opcache
+- zephir parser     - zip               - zlib
 ```
 
 Read more about
