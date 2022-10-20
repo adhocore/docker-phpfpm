@@ -33,6 +33,14 @@ docker pull adhocore/phpfpm:8.0
 docker pull adhocore/phpfpm:7.4
 ```
 
+#### 8.2RC
+
+8.2 is release candidate and not yet production ready, but of course you can test/develop on it locally.
+
+```sh
+docker pull adhocore/phpfpm:8.2
+```
+
 To use in docker-compose
 ```yaml
 # ./docker-compose.yml
