@@ -9,7 +9,7 @@ ENV \
   SWOOLE_VERSION=4.6.7 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS="apcu ast ds ev grpc hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov psr rdkafka redis \
+  PECL_EXTENSIONS="apcu ast ds ev grpc hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov phalcon psr rdkafka redis \
     simdjson ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
@@ -69,12 +69,6 @@ RUN \
     && phpize && ./configure \
     && make -j "$(nproc)" && make install \
     && docker-php-ext-enable tideways_xhprof); } \
-#
-# phalcon
-  && { php -m | grep phalcon || (curl -sSLo /tmp/phalcon.tar.gz https://codeload.github.com/phalcon/cphalcon/tar.gz/v$PHALCON_VERSION \
-    && cd /tmp/ && tar xzf phalcon.tar.gz \
-    && cd cphalcon-$PHALCON_VERSION/build && sh install \
-    && docker-php-ext-enable phalcon --ini-name docker-php-ext-phalcon.ini); } \
 #
 # composer
   && curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2 \

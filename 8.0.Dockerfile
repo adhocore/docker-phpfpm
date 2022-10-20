@@ -8,7 +8,7 @@ ENV \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="ev imagick ssh2-1.3.1 xlswriter yaf" \
-  PECL_EXTENSIONS="apcu ast ds grpc igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka simdjson uuid xdebug xhprof yaml" \
+  PECL_EXTENSIONS="apcu ast ds grpc igbinary lzf memcached mongodb msgpack oauth pcov phalcon psr redis rdkafka simdjson uuid xdebug xhprof yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
