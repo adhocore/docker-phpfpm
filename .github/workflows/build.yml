@@ -34,7 +34,7 @@ jobs:
         with:
           push: true
           file: 8.0.Dockerfile
-          tags: adhocore/phpfpm:8.0-alp3.13,adhocore/phpfpm:8.0
+          tags: adhocore/phpfpm:8.0
 
       - name: "[7.4] Build and push"
         id: docker_build_74
@@ -42,7 +42,7 @@ jobs:
         with:
           push: true
           file: 7.4.Dockerfile
-          tags: adhocore/phpfpm:7.4-alp3.13,adhocore/phpfpm:7.4
+          tags: adhocore/phpfpm:7.4
 
       - name: "[8.2] Build and push"
         id: docker_build_82
