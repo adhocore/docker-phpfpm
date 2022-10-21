@@ -15,11 +15,11 @@ done
 xmodules=
 for module in $modules; do
   mod=$(echo $module | sed -E 's/\-[^ ]+//g')
-  php -m | grep -q $mod || docker-php-ext-enable $mod >/dev/null 2>&1 || true
-  (ls $extDir/$mod.so >/dev/null && echo "$module already installed") \
-    || ([[ "" != "$modules" ]] && modules="$modules $module" || modules="$module")
+  php -m | grep -iq $mod || docker-php-ext-enable $mod >/dev/null 2>&1 || true
+  { ls $extDir/$mod.so >/dev/null 2>&1 && echo "$module already installed"; } \
+    || { [[ "" != "$xmodules" ]] && xmodules="$xmodules $module" || xmodules="$module"; }
 done
 [[ "" = "$xmodules" ]] && exit 0
 
 echo "docker-php-ext-install $xmodules"
-docker-php-ext-install $xmodules > /dev/null
+yes '' | docker-php-ext-install $xmodules > /dev/null
