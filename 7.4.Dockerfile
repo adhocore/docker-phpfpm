@@ -40,7 +40,7 @@ RUN \
 # php extensions
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
-    && yes '' | docker-pecl-ext-install $PECL_EXTENSIONS \
+    && docker-pecl-ext-install $PECL_EXTENSIONS \
     && cd /usr/src/php/ext/ \
     && for BUNDLE_EXT in $PECL_BUNDLE; do pecl bundle $BUNDLE_EXT; done \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \

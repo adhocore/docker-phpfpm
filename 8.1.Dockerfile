@@ -41,7 +41,7 @@ RUN \
     && pecl channel-update pecl.php.net \
     && { php -m | grep gd || docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd; } \
     && docker-php-ext-install-if $PHP_EXTENSIONS \
-    && yes '' | docker-pecl-ext-install $PECL_EXTENSIONS $PECL_EXTENSIONS_FUTURE \
+    && docker-pecl-ext-install $PECL_EXTENSIONS $PECL_EXTENSIONS_FUTURE \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS $PECL_EXTENSIONS_FUTURE | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
     && cd /usr/src/php/ext/ \
     # swoole
