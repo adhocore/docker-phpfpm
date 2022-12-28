@@ -192,15 +192,15 @@ Read more about
 ### Production Usage
 
 For production you may want to get rid of some extensions that are not really required.
-In such case, you can build a custom image on top `adhocore/phpfpm:8.0` like so:
+In such case, you can build a custom image on top `adhocore/phpfpm:8.2` like so:
 
 ```Dockerfile
-FROM adhocore/phpfpm:8.0
+FROM adhocore/phpfpm:8.2 # or 8.1 or 8.0
 
 # Disable extensions you won't need. You can add as much as you want separated by space.
 RUN docker-php-ext-disable xdebug pcov ldap
 ```
 
-> `docker-php-ext-disable` is shell script available in `adhocore/phpfpm:8.0` only and not in official PHP docker images.
+> `docker-php-ext-disable` is shell script available in `adhocore/phpfpm` only and not in official PHP docker images.
 
 > Extensions disabled can be re enabled with `docker-php-ext-enable` later again without the overhead of recompiling/rebuilding all over again.
