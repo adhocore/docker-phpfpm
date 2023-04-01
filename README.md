@@ -10,7 +10,7 @@
 
 Docker PHP FPM with lean alpine base. The download size is just about ~150MB.
 
-It contains PHP8.2.0, PHP8.1.13 and PHP8.0.26 with plenty of common and useful extensions.
+It contains PHP8.2.4, PHP8.1.17 and PHP8.0.28 with plenty of common and useful extensions.
 
 You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.33 but this version is now deprecated.
 
