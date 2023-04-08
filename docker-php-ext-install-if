@@ -22,4 +22,4 @@ done
 [[ "" = "$xmodules" ]] && exit 0
 
 echo "docker-php-ext-install $xmodules"
-yes '' | docker-php-ext-install $xmodules > /dev/null
+yes '' | MAKEFLAGS="-j $(nproc)" docker-php-ext-install -j "$(nproc)" $xmodules

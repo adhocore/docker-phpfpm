@@ -9,7 +9,7 @@ ENV \
   SWOOLE_VERSION=4.6.7 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS="apcu ast ds ev grpc hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov phalcon psr rdkafka redis \
+  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov phalcon psr rdkafka redis \
     simdjson ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
   PECL_BUNDLE="memcached event" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
@@ -19,8 +19,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-COPY --from=adhocore/phpfpm:7.4 /usr/local/lib/php/extensions/no-debug-non-zts-20190902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/
-COPY --from=adhocore/phpfpm:7.4 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+#COPY --from=adhocore/phpfpm:7.4 /usr/local/lib/php/extensions/no-debug-non-zts-20190902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/
+#COPY --from=adhocore/phpfpm:7.4 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
@@ -45,13 +45,13 @@ RUN \
     && for BUNDLE_EXT in $PECL_BUNDLE; do pecl bundle $BUNDLE_EXT; done \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
     # swoole
-    && { php -m | grep swoole || (curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-      && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
-      && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-      && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
-      && rm -f swoole.tar.gz swoole_async.tar.gz); } \
+    # && { php -m | grep swoole || (curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
+    #   && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
+    #   && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
+    #   && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
+    #   && rm -f swoole.tar.gz swoole_async.tar.gz); } \
     # zephir_parser
-    && { php -m | grep swoole || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
+    && { php -m | grep zephir_parser || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
       && tar xzf zephir_parser.tar.gz \
       && rm -f zephir_parser.tar.gz \
       && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser); } \

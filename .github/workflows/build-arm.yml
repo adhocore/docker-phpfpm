@@ -1,4 +1,4 @@
-name: build
+name: build-arm
 
 on:
   workflow_dispatch:
