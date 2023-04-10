@@ -7,6 +7,7 @@
 [![Donate 25](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&label=donate+25)](https://www.paypal.me/ji10/25usd)
 [![Donate 50](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&label=donate+50)](https://www.paypal.me/ji10/50usd) -->
 
+**Important Note**: To be able to support arm builds ([#81](https://github.com/adhocore/docker-phpfpm/issues/81)) we removed some big and slow to compile extensions like swoole/grpc for now.
 
 Docker PHP FPM with lean alpine base. The download size is just about ~150MB.
 
