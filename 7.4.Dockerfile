@@ -1,4 +1,4 @@
-FROM php:7.4.33-fpm-alpine3.15
+FROM php:7.4.33-fpm-alpine3.16
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -18,8 +18,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-#COPY --from=adhocore/phpfpm:7.4 /usr/local/lib/php/extensions/no-debug-non-zts-20190902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/
-#COPY --from=adhocore/phpfpm:7.4 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+COPY --from=adhocore/phpfpm:7.4 /usr/local/lib/php/extensions/no-debug-non-zts-20190902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/
+COPY --from=adhocore/phpfpm:7.4 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
