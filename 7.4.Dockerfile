@@ -9,11 +9,10 @@ ENV \
   SWOOLE_VERSION=4.6.7 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb msgpack oauth pcov phalcon psr rdkafka redis \
-    simdjson ssh2-1.2 uuid xdebug xlswriter yaf yaml" \
-  PECL_BUNDLE="memcached event" \
+  PECL_EXTENSIONS="apcu ast ds ev hrtime igbinary imagick lzf lua mongodb memcached msgpack oauth pcov psr rdkafka redis \
+    simdjson ssh2-1.2 uuid xdebug-3.1.6 xlswriter yaf yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
-    soap sockets swoole sysvshm sysvmsg sysvsem tidy zip zephir_parser"
+    soap sockets sysvshm sysvmsg sysvsem tidy zip"
 
 # docker-*
 COPY docker-* /usr/local/bin/
@@ -41,8 +40,6 @@ RUN \
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && docker-pecl-ext-install $PECL_EXTENSIONS \
-    && cd /usr/src/php/ext/ \
-    && for BUNDLE_EXT in $PECL_BUNDLE; do pecl bundle $BUNDLE_EXT; done \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
     # swoole
     # && { php -m | grep swoole || (curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
@@ -51,16 +48,16 @@ RUN \
     #   && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
     #   && rm -f swoole.tar.gz swoole_async.tar.gz); } \
     # zephir_parser
-    && { php -m | grep zephir_parser || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
-      && tar xzf zephir_parser.tar.gz \
-      && rm -f zephir_parser.tar.gz \
-      && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser); } \
+    # && { php -m | grep zephir_parser || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
+    #   && tar xzf zephir_parser.tar.gz \
+    #   && rm -f zephir_parser.tar.gz \
+    #   && mv php-zephir-parser-$ZEPHIR_VERSION zephir_parser); } \
     && { php -m | grep gd || docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd; } \
-    && docker-php-ext-install-if $PHP_EXTENSIONS $PECL_BUNDLE \
+    && docker-php-ext-install-if $PHP_EXTENSIONS \
     && cd /usr/local/etc/php/conf.d/ \
       && { mv docker-php-ext-event.ini docker-php-ext-zevent.ini || true; } \
     && { pecl clear-cache || true; } \
-  && docker-php-ext-disable xdebug \
+  && { php -m | grep xdebug && docker-php-ext-disable xdebug || true; } \
     && docker-php-source delete \
 #
 # tideways_xhprof

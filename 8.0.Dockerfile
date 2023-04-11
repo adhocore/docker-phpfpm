@@ -8,7 +8,7 @@ ENV \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="ev imagick ssh2-1.3.1 xlswriter yaf" \
-  PECL_EXTENSIONS="apcu ast ds igbinary lzf memcached mongodb msgpack oauth pcov phalcon psr redis rdkafka simdjson uuid xdebug xhprof yaml" \
+  PECL_EXTENSIONS="apcu ast ds igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka simdjson uuid xdebug xhprof yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql pdo_pgsql \
     pspell shmop soap sockets sysvshm sysvmsg sysvsem tidy xsl zip"
 
@@ -16,8 +16,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-#COPY --from=adhocore/phpfpm:8.0 /usr/local/lib/php/extensions/no-debug-non-zts-20200930/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20200930/
-#COPY --from=adhocore/phpfpm:8.0 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+COPY --from=adhocore/phpfpm:8.0 /usr/local/lib/php/extensions/no-debug-non-zts-20200930/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20200930/
+COPY --from=adhocore/phpfpm:8.0 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
