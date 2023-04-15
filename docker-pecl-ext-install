@@ -29,5 +29,5 @@ for module in $modules; do
 done
 [[ "" = "$xmodules" ]] && exit 0
 
-echo "pecl install $xmodules"
+echo "MAKEFLAGS='-j $(nproc)' pecl install $xmodules"
 yes '' | MAKEFLAGS="-j $(nproc)" pecl install $xmodules
