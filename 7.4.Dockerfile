@@ -40,13 +40,9 @@ RUN \
   && docker-php-source extract \
     && pecl channel-update pecl.php.net \
     && docker-pecl-ext-install $PECL_EXTENSIONS \
+    && cd /usr/local/lib/php/extensions/no-debug-non-zts-20190902 && rm -f intl.so mongodb.so && cd - \
+    && cd /usr/local/etc/php/conf.d && rm -f *-intl.ini *-mongodb.ini && cd - \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
-    # swoole
-    # && { php -m | grep swoole || (curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-    #   && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
-    #   && tar xzf swoole.tar.gz && tar xzf swoole_async.tar.gz \
-    #   && mv swoole-src-$SWOOLE_VERSION swoole && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
-    #   && rm -f swoole.tar.gz swoole_async.tar.gz); } \
     # zephir_parser
     # && { php -m | grep zephir_parser || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
     #   && tar xzf zephir_parser.tar.gz \

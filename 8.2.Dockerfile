@@ -45,16 +45,7 @@ RUN \
     && docker-php-ext-install-if $PHP_EXTENSIONS \
     && docker-pecl-ext-install $PECL_EXTENSIONS \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
-    && cd /usr/src/php/ext/ \
-    # swoole
-    # && { php -m | grep swoole || (curl -sSLo swoole.tar.gz https://github.com/swoole/swoole-src/archive/v$SWOOLE_VERSION.tar.gz \
-    #   && tar xzf swoole.tar.gz && mv swoole-src-$SWOOLE_VERSION swoole \
-    # # && curl -sSLo swoole_async.tar.gz https://github.com/swoole/ext-async/archive/v$SWOOLE_ASYNC_VERSION.tar.gz \
-    # #  && tar xzf swoole_async.tar.gz && mv ext-async-$SWOOLE_ASYNC_VERSION swoole_async \
-    #   && rm -f swoole.tar.gz swoole_async.tar.gz \
-    # && docker-php-ext-install -j "$(nproc)" swoole); } \
-    # && { pecl clear-cache || true; } \
-  && { docker-php-ext-disable xdebug || true; } \
+  && { php -m | grep xdebug && docker-php-ext-disable xdebug || true; } \
     && docker-php-source delete \
 #
 # composer
