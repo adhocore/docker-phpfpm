@@ -23,7 +23,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: "Docker Pull"
         run: |
-          docker pull adhocore/phpfpm:7.4 || true
           docker pull adhocore/phpfpm:8.0 || true
           docker pull adhocore/phpfpm:8.1 || true
           docker pull adhocore/phpfpm:8.2 || true
@@ -34,7 +33,7 @@ jobs:
         with:
           push: true
           file: 8.2.Dockerfile
-          tags: adhocore/phpfpm:8.2
+          tags: adhocore/phpfpm:8.2,adhocore/phpfpm:latest
           platforms: linux/amd64,linux/arm64
 
       - name: "[8.1] Build and push"
