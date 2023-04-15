@@ -38,10 +38,10 @@ RUN \
 #
 # php extensions
   && docker-php-source extract \
-    && pecl channel-update pecl.php.net \
-    && docker-pecl-ext-install $PECL_EXTENSIONS \
     && cd /usr/local/lib/php/extensions/no-debug-non-zts-20190902 && rm -f intl.so mongodb.so && cd - \
     && cd /usr/local/etc/php/conf.d && rm -f *-intl.ini *-mongodb.ini && cd - \
+    && pecl channel-update pecl.php.net \
+    && docker-pecl-ext-install $PECL_EXTENSIONS \
     && { docker-php-ext-enable $(echo $PECL_EXTENSIONS | sed -E 's/\-[^ ]+//g') opcache > /dev/null || true; } \
     # zephir_parser
     # && { php -m | grep zephir_parser || (curl -sSLo zephir_parser.tar.gz https://github.com/phalcon/php-zephir-parser/archive/v$ZEPHIR_VERSION.tar.gz \
