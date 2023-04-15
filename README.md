@@ -77,7 +77,8 @@ RUN \
     && apk del $PHPIZE_DEPS \
   #
   # if it is in php ext: \
-  && docker-php-source extract && docker-php-ext-install-if dba
+  && docker-php-source extract && docker-php-ext-install-if dba \
+    && docker-php-source delete
 ```
 
 Debug extension `xdebug` is installed but disabled by default for performance reason,
