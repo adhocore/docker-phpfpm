@@ -10,9 +10,9 @@
 **Important Note**: To be able to support arm builds ([#81](https://github.com/adhocore/docker-phpfpm/issues/81)) we removed some big and slow to compile extensions like swoole/grpc/phalcon for now.
 Check [example](#extensions) below how to add them back in your images based off on `adhcore/phpfpm`.
 
-Docker PHP FPM with lean alpine base. The download size is just about ~150MB.
+Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP8.2.4, PHP8.1.17 and PHP8.0.28 with plenty of common and useful extensions.
+It contains PHP>=8.2.5, PHP>=8.1.18 and PHP>=8.0.28 with plenty of common and useful extensions.
 
 You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.33 but this version is now deprecated.
 
@@ -65,7 +65,7 @@ Latest versions of both Composer v1 and v2 are installed already. You can run v2
 ### Extensions
 
 You can add new extensions in your image like so:
-```
+```Dockerfile
 FROM adhocore/phpfpm:8.1 # or 8.2, 8.0
 
 RUN \
