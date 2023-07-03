@@ -7,11 +7,11 @@ ENV \
   SWOOLE_VERSION=4.8.9 \
   SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
-  PECL_EXTENSIONS="apcu ast ds ev igbinary imagick lzf memcached mongodb msgpack oauth pcov \
+  PECL_EXTENSIONS="apcu ast ds ev igbinary lzf memcached mongodb msgpack oauth pcov \
     psr redis rdkafka simdjson ssh2-1.3.1 uuid xdebug xhprof xlswriter yaml" \
   PHP_EXTENSIONS="bcmath bz2 calendar exif gd gettext gmp imap intl ldap mysqli pcntl pdo_mysql pgsql \
     pdo_pgsql pspell shmop soap sysvshm sysvmsg sysvsem tidy xsl zip" \
-  PECL_EXTENSIONS_FUTURE="grpc yaf" \
+  PECL_EXTENSIONS_FUTURE="grpc imagick yaf" \
   PHP_EXTENSIONS_FUTURE="intl sockets"
 
 # docker-*
