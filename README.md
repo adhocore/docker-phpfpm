@@ -91,6 +91,27 @@ just run `docker-php-ext-enable xdebug` to enable it again without having to reb
 
 Below you can find list of extensions by image tags.
 
+### PHP8.3a
+
+```
+PHP 8.3.0alpha2, Total extensions: 60
+- bcmath            - bz2               - calendar          - core              
+- ctype             - curl              - date              - dom               
+- exif              - fileinfo          - filter            - fpm               
+- ftp               - gd                - gettext           - gmp               
+- hash              - iconv             - imap              - intl              
+- json              - ldap              - libxml            - mbstring          
+- mysqli            - mysqlnd           - openssl           - pcntl             
+- pcre              - pdo               - pdo_mysql         - pdo_pgsql         
+- pdo_sqlite        - pgsql             - phar              - posix             
+- pspell            - random            - readline          - reflection        
+- session           - shmop             - simplexml         - soap              
+- sodium            - spl               - sqlite3           - standard          
+- sysvmsg           - sysvsem           - sysvshm           - tidy              
+- tokenizer         - xdebug            - xml               - xmlreader         
+- xmlwriter         - xsl               - zip               - zlib 
+```
+
 #### PHP8.2
 
 The following PHP extensions are installed in `adhocore/phpfpm:8.2`:
