@@ -12,10 +12,10 @@ Check [example](#extensions) below how to add them back in your images based off
 
 Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP>=8.2.8, PHP>=8.1.21 and PHP>=8.0.29 with plenty of common and useful extensions.
+It contains PHP>=8.2.11, PHP>=8.1.24 and PHP>=8.0.29 with plenty of common and useful extensions.
 
-If you want to tryout and experiment with preview build of PHP8.3 beta, you can use image `adhocore/phpfpm:8.3b`. 
-> 8.3b has limited extensions and is not production ready yet.
+If you want to tryout and experiment with preview build of PHP8.3 rc, you can use image `adhocore/phpfpm:8.3r`.
+> 8.3r has limited extensions and is not production ready yet.
 
 You can also continue using [`adhocore/phpfpm:7.4`](./7.4.Dockerfile) for PHP7.4.33 but this version is now deprecated.
 
@@ -30,15 +30,19 @@ The images are always latest, everytime a new PHP version comes out and its offi
 To pull latest image:
 
 ```sh
+# for php >=8.2.11
 docker pull adhocore/phpfpm:8.2
 
-# or for 8.1
+# or for php >=8.1.24
 docker pull adhocore/phpfpm:8.1
 
-# or for php 8.0
+# or for php >=8.0.30
 docker pull adhocore/phpfpm:8.0
 
-# or for php 7.4 (end of life)
+# or for php >=8.3rc4 (release candidate)
+docker pull adhocore/phpfpm:8.3r
+
+# or for php >=7.4 (end of life)
 docker pull adhocore/phpfpm:7.4
 ```
 
@@ -95,21 +99,21 @@ Below you can find list of extensions by image tags.
 
 ```
 PHP 8.3.0alpha2, Total extensions: 60
-- bcmath            - bz2               - calendar          - core              
-- ctype             - curl              - date              - dom               
-- exif              - fileinfo          - filter            - fpm               
-- ftp               - gd                - gettext           - gmp               
-- hash              - iconv             - imap              - intl              
-- json              - ldap              - libxml            - mbstring          
-- mysqli            - mysqlnd           - openssl           - pcntl             
-- pcre              - pdo               - pdo_mysql         - pdo_pgsql         
-- pdo_sqlite        - pgsql             - phar              - posix             
-- pspell            - random            - readline          - reflection        
-- session           - shmop             - simplexml         - soap              
-- sodium            - spl               - sqlite3           - standard          
-- sysvmsg           - sysvsem           - sysvshm           - tidy              
-- tokenizer         - xdebug            - xml               - xmlreader         
-- xmlwriter         - xsl               - zip               - zlib 
+- bcmath            - bz2               - calendar          - core
+- ctype             - curl              - date              - dom
+- exif              - fileinfo          - filter            - fpm
+- ftp               - gd                - gettext           - gmp
+- hash              - iconv             - imap              - intl
+- json              - ldap              - libxml            - mbstring
+- mysqli            - mysqlnd           - openssl           - pcntl
+- pcre              - pdo               - pdo_mysql         - pdo_pgsql
+- pdo_sqlite        - pgsql             - phar              - posix
+- pspell            - random            - readline          - reflection
+- session           - shmop             - simplexml         - soap
+- sodium            - spl               - sqlite3           - standard
+- sysvmsg           - sysvsem           - sysvshm           - tidy
+- tokenizer         - xdebug            - xml               - xmlreader
+- xmlwriter         - xsl               - zip               - zlib
 ```
 
 #### PHP8.2
