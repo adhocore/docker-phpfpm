@@ -1,4 +1,4 @@
-FROM php:8.3.0beta2-fpm-alpine3.17
+FROM php:8.3.0RC4-fpm-alpine3.17
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
