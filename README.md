@@ -12,7 +12,7 @@ Check [example](#extensions) below how to add them back in your images based off
 
 Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP>=8.2.11, PHP>=8.1.24 and PHP>=8.0.29 with plenty of common and useful extensions.
+It contains PHP>=8.2.12, PHP>=8.1.25 and PHP>=8.0.30 with plenty of common and useful extensions.
 
 If you want to tryout and experiment with preview build of PHP8.3 rc, you can use image `adhocore/phpfpm:8.3r`.
 > 8.3r has limited extensions and is not production ready yet.
@@ -30,16 +30,16 @@ The images are always latest, everytime a new PHP version comes out and its offi
 To pull latest image:
 
 ```sh
-# for php >=8.2.11
+# for php >=8.2.12
 docker pull adhocore/phpfpm:8.2
 
-# or for php >=8.1.24
+# or for php >=8.1.25
 docker pull adhocore/phpfpm:8.1
 
 # or for php >=8.0.30
 docker pull adhocore/phpfpm:8.0
 
-# or for php >=8.3rc4 (release candidate)
+# or for php >=8.3rc5 (release candidate)
 docker pull adhocore/phpfpm:8.3r
 
 # or for php >=7.4 (end of life)
@@ -95,10 +95,10 @@ just run `docker-php-ext-enable xdebug` to enable it again without having to reb
 
 Below you can find list of extensions by image tags.
 
-### PHP8.3b
+### PHP8.3r
 
 ```
-PHP 8.3.0alpha2, Total extensions: 60
+PHP 8.3.0rc5, Total extensions: 60
 - bcmath            - bz2               - calendar          - core
 - ctype             - curl              - date              - dom
 - exif              - fileinfo          - filter            - fpm
@@ -121,7 +121,7 @@ PHP 8.3.0alpha2, Total extensions: 60
 The following PHP extensions are installed in `adhocore/phpfpm:8.2`:
 
 ```
-PHP >=8.2.7, Total extensions: 82
+PHP >=8.2.12, Total extensions: 82
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
@@ -150,7 +150,7 @@ PHP >=8.2.7, Total extensions: 82
 The following PHP extensions are installed in `adhocore/phpfpm:8.1`:
 
 ```
-PHP >=8.1.20, Total extensions: 83
+PHP >=8.1.25, Total extensions: 83
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
@@ -179,7 +179,7 @@ PHP >=8.1.20, Total extensions: 83
 The following PHP extensions are installed in `adhocore/phpfpm:8.0`:
 
 ```
-PHP >=8.0.29, Total extensions: 84
+PHP >=8.0.30, Total extensions: 84
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
