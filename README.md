@@ -12,7 +12,7 @@ Check [example](#extensions) below how to add them back in your images based off
 
 Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP>=8.2.12, PHP>=8.1.25 and PHP>=8.0.30 with plenty of common and useful extensions.
+It contains PHP>=8.3.4, PHP>=8.2.13, PHP>=8.1.26 and PHP>=8.0.30 with plenty of common and useful extensions.
 
 If you want to tryout and experiment with preview build of PHP8.3 rc, you can use image `adhocore/phpfpm:8.3r`.
 > 8.3r has limited extensions and is not production ready yet.
@@ -30,6 +30,9 @@ The images are always latest, everytime a new PHP version comes out and its offi
 To pull latest image:
 
 ```sh
+# for php >=8.3.4
+docker pull adhocore/phpfpm:8.3
+
 # for php >=8.2.12
 docker pull adhocore/phpfpm:8.2
 
@@ -95,10 +98,10 @@ just run `docker-php-ext-enable xdebug` to enable it again without having to reb
 
 Below you can find list of extensions by image tags.
 
-### PHP8.3r
+### PHP8.3
 
 ```
-PHP 8.3.0rc5, Total extensions: 60
+PHP 8.3.4, Total extensions: 60
 - bcmath            - bz2               - calendar          - core
 - ctype             - curl              - date              - dom
 - exif              - fileinfo          - filter            - fpm
