@@ -12,7 +12,7 @@ Check [example](#extensions) below how to add them back in your images based off
 
 Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP>=8.3.4, PHP>=8.2.13, PHP>=8.1.26 and PHP>=8.0.30 with plenty of common and useful extensions.
+It contains PHP>=8.3.4, PHP>=8.2.17, PHP>=8.1.27 and PHP>=8.0.30 with plenty of common and useful extensions.
 
 If you want to tryout and experiment with preview build of PHP8.3 rc, you can use image `adhocore/phpfpm:8.3r`.
 > 8.3r has limited extensions and is not production ready yet.
@@ -33,10 +33,10 @@ To pull latest image:
 # for php >=8.3.4
 docker pull adhocore/phpfpm:8.3
 
-# for php >=8.2.12
+# for php >=8.2.17
 docker pull adhocore/phpfpm:8.2
 
-# or for php >=8.1.25
+# or for php >=8.1.27
 docker pull adhocore/phpfpm:8.1
 
 # or for php >=8.0.30
@@ -56,7 +56,7 @@ version: '3'
 
 services:
   phpfpm:
-    image: adhocore/phpfpm:8.0
+    image: adhocore/phpfpm:8.3
     container_name: phpfpm
     volumes:
       - ./path/to/your/app:/var/www/html
@@ -76,7 +76,7 @@ Latest versions of both Composer v1 and v2 are installed already. You can run v2
 
 You can add new extensions in your image like so:
 ```Dockerfile
-FROM adhocore/phpfpm:8.1 # or 8.2, 8.0
+FROM adhocore/phpfpm:8.3 # or 8.2, 8.1
 
 RUN \
   # setup
@@ -124,7 +124,7 @@ PHP 8.3.4, Total extensions: 60
 The following PHP extensions are installed in `adhocore/phpfpm:8.2`:
 
 ```
-PHP >=8.2.12, Total extensions: 82
+PHP >=8.2.17, Total extensions: 82
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
@@ -153,7 +153,7 @@ PHP >=8.2.12, Total extensions: 82
 The following PHP extensions are installed in `adhocore/phpfpm:8.1`:
 
 ```
-PHP >=8.1.25, Total extensions: 83
+PHP >=8.1.27, Total extensions: 83
 - apcu              - ast               - bcmath            - bz2
 - calendar          - core              - ctype             - curl
 - date              - dom               - ds                - ev
