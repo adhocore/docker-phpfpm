@@ -3,7 +3,7 @@
 set -e
 
 extDir=$(php -r 'echo ini_get("extension_dir");')
-iniDir=$PHP_INI_DIR/conf.d/
+iniDir=$PHP_INI_DIR/conf.d
 
 usage() {
   echo "usage: $0 [options] module-name [module-name ...]"
@@ -31,6 +31,6 @@ for module; do
 done
 
 [[ -n "$modules" ]] \
-  && rmIni=$(grep -lE "$modules" $PHP_INI_DIR/conf.d/*.ini) \
+  && rmIni=$(grep -lE "$modules" $iniDir/*.ini) \
   && echo "$rmIni" \
     | xargs rm

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+extDir=$(php -r 'echo ini_get("extension_dir");')
+
+[[ "" = "$@" ]] && exit 0
+
+docker-php-ext-disable $@
+
+for module; do
+  rm -rf $extDir/$module $extDir/$module.so
+done
