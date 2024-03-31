@@ -16,7 +16,7 @@ usage() {
 modules=
 for module; do
   [[ "$module" == "--help" ]] || [[ "$module" == "-h" ]] && usage >&2
-  [[ -n "$modules" ]] && modules="$modules $module" || modules="$module"
+  [[ -n "$modules" ]] && modules="$modules $module" || modules="$module" || true
 done
 [[ "" = "$modules" ]] && exit 0
 
