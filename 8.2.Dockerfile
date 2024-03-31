@@ -18,8 +18,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-COPY --from=adhocore/phpfpm:8.2 /usr/local/lib/php/extensions/no-debug-non-zts-20220829/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
-COPY --from=adhocore/phpfpm:8.2 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+# COPY --from=adhocore/phpfpm:8.2 /usr/local/lib/php/extensions/no-debug-non-zts-20220829/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
+# COPY --from=adhocore/phpfpm:8.2 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
@@ -40,7 +40,7 @@ RUN \
 #
 # php extensions
   && docker-php-source extract \
-    && docker-php-ext-remove apcu intl mognodb \
+    && echo docker-php-ext-remove apcu intl mognodb imagick \
     && pecl channel-update pecl.php.net \
     && { php -m | grep gd || docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd; } \
     && docker-php-ext-install-if $PHP_EXTENSIONS \
