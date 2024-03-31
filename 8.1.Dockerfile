@@ -3,9 +3,6 @@ FROM php:8.1.27-fpm-alpine3.18
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
-  MAXMIND_VERSION=1.4.2 \
-  SWOOLE_VERSION=4.8.9 \
-  SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS_FUTURE="imagick ssh2-1.3.1 xlswriter" \
   PECL_EXTENSIONS="apcu ast ds ev igbinary lzf memcached mongodb msgpack oauth pcov psr redis rdkafka simdjson uuid xdebug xhprof yaf yaml" \
@@ -16,8 +13,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+# COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+# COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
@@ -37,8 +34,8 @@ RUN \
       openldap-back-mdb tidyhtml yaml zlib \
 #
 # php extensions
-  && docker-php-source extract \
-    && rm -f /usr/local/lib/php/extensions/no-debug-non-zts-20210902/intl.so /usr/local/etc/php/conf.d/docker-php-ext-intl.ini \
+  && echo 'php-extensions' && docker-php-source extract \
+    && docker-php-ext-remove intl || true \
     && pecl channel-update pecl.php.net \
     && { php -m | grep gd || docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd; } \
     && docker-php-ext-install-if $PHP_EXTENSIONS \

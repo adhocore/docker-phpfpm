@@ -3,9 +3,6 @@ FROM php:8.3.4-fpm-alpine3.18
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
-  MAXMIND_VERSION=1.4.2 \
-  SWOOLE_VERSION=4.8.9 \
-  SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS="apcu ast ds ev igbinary lzf memcached mongodb msgpack oauth pcov \
     psr redis rdkafka simdjson ssh2-1.3.1 uuid xdebug xhprof xlswriter yaml" \

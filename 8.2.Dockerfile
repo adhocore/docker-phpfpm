@@ -3,9 +3,6 @@ FROM php:8.2.17-fpm-alpine3.18
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
 ENV \
-  MAXMIND_VERSION=1.4.2 \
-  SWOOLE_VERSION=4.8.9 \
-  SWOOLE_ASYNC_VERSION=4.5.5 \
   LD_PRELOAD=/usr/lib/preloadable_libiconv.so \
   PECL_EXTENSIONS="apcu ast ds ev igbinary imagick lzf memcached mongodb msgpack oauth pcov \
     psr redis rdkafka simdjson ssh2-1.3.1 uuid xdebug xhprof xlswriter yaml" \
@@ -18,8 +15,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-# COPY --from=adhocore/phpfpm:8.2 /usr/local/lib/php/extensions/no-debug-non-zts-20220829/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
-# COPY --from=adhocore/phpfpm:8.2 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+COPY --from=adhocore/phpfpm:8.2 /usr/local/lib/php/extensions/no-debug-non-zts-20220829/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
+COPY --from=adhocore/phpfpm:8.2 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
@@ -40,7 +37,7 @@ RUN \
 #
 # php extensions
   && docker-php-source extract \
-    && echo docker-php-ext-remove apcu intl mognodb imagick \
+    && docker-php-ext-remove intl \
     && pecl channel-update pecl.php.net \
     && { php -m | grep gd || docker-php-ext-configure gd --with-freetype --with-jpeg --enable-gd; } \
     && docker-php-ext-install-if $PHP_EXTENSIONS \
