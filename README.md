@@ -19,6 +19,7 @@ If you are looking for a complete local development stack then check
 
 The images are always latest, everytime a new PHP version comes out and its official image is available we will see it in adhocore/phpfpm the next day.
 
+> This repo is looking for maintainer (start a thread in [#101](https://github.com/adhocore/docker-phpfpm/issues/101) if interested)
 
 ## Usage
 
