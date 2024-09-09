@@ -1,4 +1,4 @@
-FROM php:8.1.27-fpm-alpine3.18
+FROM php:8.1.29-fpm-alpine3.20
 
 MAINTAINER Jitendra Adhikari <jiten.adhikary@gmail.com>
 
@@ -13,8 +13,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+#COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+#COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
