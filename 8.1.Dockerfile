@@ -13,8 +13,8 @@ ENV \
 COPY docker-* /usr/local/bin/
 
 # copy from existing
-#COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-#COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
+COPY --from=adhocore/phpfpm:8.1 /usr/local/lib/php/extensions/no-debug-non-zts-20210902/*.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+COPY --from=adhocore/phpfpm:8.1 /usr/local/etc/php/conf.d/*.ini /usr/local/etc/php/conf.d/
 
 # ext
 COPY ext.php /ext.php
