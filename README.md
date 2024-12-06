@@ -12,7 +12,7 @@ Check [example](#extensions) below how to add them back in your images based off
 
 Docker PHP FPM with lean alpine base. The download size is just about **~100MB** - tiny given how many extensions it has baked in.
 
-It contains PHP>=8.3.4, PHP>=8.2.17, PHP>=8.1.27 and PHP>=8.0.30 with plenty of common and useful extensions.
+It contains PHP>=8.4.1, PHP>=8.3.4, PHP>=8.2.17, PHP>=8.1.27 and PHP>=8.0.30 with plenty of common and useful extensions.
 
 If you are looking for a complete local development stack then check
 [`adhocore/lemp`](https://github.com/adhocore/docker-lemp).
@@ -26,6 +26,9 @@ The images are always latest, everytime a new PHP version comes out and its offi
 To pull latest image:
 
 ```sh
+# for php >=8.4.1
+docker pull adhocore/phpfpm:8.4
+
 # for php >=8.3.4
 docker pull adhocore/phpfpm:8.3
 
@@ -72,7 +75,7 @@ Latest versions of both Composer v1 and v2 are installed already. You can run v2
 
 You can add new extensions in your image like so:
 ```Dockerfile
-FROM adhocore/phpfpm:8.3 # or 8.2, 8.1
+FROM adhocore/phpfpm:8.4 # or 8.3, 8.2
 
 RUN \
   # setup
@@ -93,6 +96,27 @@ just run `docker-php-ext-enable xdebug` to enable it again without having to reb
 > `docker-php-ext-install-if` is like the inbuilt `docker-php-ext-install` but a little better, because this one installs extensions only if really needed i.e. not installed at all (so even disabled extensions need not to be installed all over again).
 
 Below you can find list of extensions by image tags.
+
+### PHP8.4
+
+```
+PHP 8.4.1, Total extensions: 60
+- bcmath            - bz2               - calendar          - core
+- ctype             - curl              - date              - dom
+- exif              - fileinfo          - filter            - fpm
+- ftp               - gd                - gettext           - gmp
+- hash              - iconv             - imap              - intl
+- json              - ldap              - libxml            - mbstring
+- mysqli            - mysqlnd           - openssl           - pcntl
+- pcre              - pdo               - pdo_mysql         - pdo_pgsql
+- pdo_sqlite        - pgsql             - phar              - posix
+- pspell            - random            - readline          - reflection
+- session           - shmop             - simplexml         - soap
+- sodium            - spl               - sqlite3           - standard
+- sysvmsg           - sysvsem           - sysvshm           - tidy
+- tokenizer         - xdebug            - xml               - xmlreader
+- xmlwriter         - xsl               - zip               - zlib
+```
 
 ### PHP8.3
 
@@ -238,10 +262,10 @@ Read more about
 ### Production Usage
 
 For production you may want to get rid of some extensions that are not really required.
-In such case, you can build a custom image on top `adhocore/phpfpm:8.2` like so:
+In such case, you can build a custom image on top `adhocore/phpfpm:8.4` like so:
 
 ```Dockerfile
-FROM adhocore/phpfpm:8.2 # or 8.1 or 8.0
+FROM adhocore/phpfpm:8.4 # or 8.3 or 8.2
 
 # Disable extensions you won't need. You can add as much as you want separated by space.
 RUN docker-php-ext-disable xdebug pcov ldap
