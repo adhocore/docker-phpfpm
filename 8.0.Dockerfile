@@ -28,7 +28,7 @@ RUN \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev libxslt-dev \
       freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
-    && apk add --no-cache aspell gettext gnu-libiconv grpc \
+    && apk add --no-cache aspell gettext gmp gnu-libiconv grpc \
       icu imagemagick libjpeg imap-dev libzip libbz2 libxml2-utils libpq \
       libmemcached libssh2 libevent libev librdkafka libxslt \
       linux-headers lua openldap openldap-back-mdb tidyhtml yaml zlib \
