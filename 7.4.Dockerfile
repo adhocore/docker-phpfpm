@@ -33,7 +33,7 @@ RUN \
       libxml2-dev tidyhtml-dev libmemcached-dev libssh2-dev libevent-dev libev-dev librdkafka-dev lua-dev \
       freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
-    && apk add --no-cache icu gettext gnu-libiconv grpc imagemagick libjpeg libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
+    && apk add --no-cache icu gettext gmp gnu-libiconv grpc imagemagick libjpeg libzip libbz2 libxml2-utils openldap-back-mdb openldap yaml \
       libpq tidyhtml imap-dev libmemcached libssh2 libevent libev librdkafka linux-headers lua zlib \
 #
 # php extensions
