@@ -19,11 +19,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: "[8.3r] Build and push"
-        id: docker_build_83
+      - name: "[8.4] Build and push"
+        id: docker_build_84
         uses: docker/build-push-action@v4
         with:
           push: true
           file: 8.3.Dockerfile
-          tags: adhocore/phpfpm:8.3r,adhocore/phpfpm:8.3rc
+          tags: adhocore/phpfpm:8.4,adhocore/phpfpm:8.4
           platforms: linux/amd64,linux/arm64
