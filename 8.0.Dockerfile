@@ -29,7 +29,7 @@ RUN \
       freetype-dev jpeg-dev libjpeg-turbo-dev oniguruma-dev \
     # prod deps
     && apk add --no-cache aspell gettext gnu-libiconv grpc \
-      icu imagemagick imap-dev libzip libbz2 libxml2-utils libpq \
+      icu imagemagick libjpeg imap-dev libzip libbz2 libxml2-utils libpq \
       libmemcached libssh2 libevent libev librdkafka libxslt \
       linux-headers lua openldap openldap-back-mdb tidyhtml yaml zlib \
 #
