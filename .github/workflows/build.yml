@@ -29,15 +29,6 @@ jobs:
           docker pull adhocore/phpfpm:8.3 || true
           docker pull adhocore/phpfpm:8.4 || true
 
-      - name: "[8.4] Build and push"
-        id: docker_build_84
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          file: 8.4.Dockerfile
-          tags: adhocore/phpfpm:8.4,adhocore/phpfpm:latest
-          platforms: linux/amd64,linux/arm64
-
       - name: "[8.3] Build and push"
         id: docker_build_83
         uses: docker/build-push-action@v4
@@ -74,3 +65,11 @@ jobs:
           tags: adhocore/phpfpm:8.0
           platforms: linux/amd64,linux/arm64
 
+      - name: "[8.4] Build and push"
+        id: docker_build_84
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          file: 8.4.Dockerfile
+          tags: adhocore/phpfpm:8.4,adhocore/phpfpm:latest
+          platforms: linux/amd64,linux/arm64
